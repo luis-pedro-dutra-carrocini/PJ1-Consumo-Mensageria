@@ -1,0 +1,92 @@
+datasource db {
+  provider = "postgresql" // Pode alterar para "mysql" ou "sqlite" se preferir
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Cliente {
+  id       Int      @id
+  name     String
+  email    String
+  document String
+  pedidos  Pedido[]
+
+  @@map("cliente")
+}
+
+model Seller {
+  id      Int      @id
+  name    String
+  city    String
+  state   String
+  pedidos Pedido[]
+
+  @@map("seller")
+}
+
+model Categoria {
+  id               String      @id
+  name             String
+  parentCategoryId String?     @map("parent_category_id")
+  parentCategory   Categoria?  @relation("SubCategorias", fields: [parentCategoryId], references: [id])
+  subCategories    Categoria[] @relation("SubCategorias")
+  produtos         Produto[]
+
+  @@map("categoria")
+}
+
+model Produto {
+  id         String       @id
+  title      String
+  unitPrice  Decimal      @map("unit_price")
+  categoryId String       @map("category_id")
+  categoria  Categoria    @relation(fields: [categoryId], references: [id])
+  items      ItemPedido[]
+
+  @@map("produto")
+}
+
+model Pedido {
+  uuid                 String       @id
+  createdAt            DateTime     @map("created_at")
+  indexedAt            DateTime     @default(now()) @map("indexed_at") // Data/hora da indexação exigida
+  channel              String
+  status               String
+  customerId           Int          @map("customer_id")
+  sellerId             Int          @map("seller_id")
+  shipmentCarrier      String?      @map("shipment_carrier")
+  shipmentService      String?      @map("shipment_service")
+  shipmentStatus       String?      @map("shipment_status")
+  shipmentTrackingCode String?      @map("shipment_tracking_code")
+  paymentMethod        String?      @map("payment_method")
+  paymentStatus        String?      @map("payment_status")
+  paymentTransactionId String?      @map("payment_transaction_id")
+  metadataSource       String?      @map("metadata_source")
+  metadataUserAgent    String?      @map("metadata_user_agent")
+  metadataIpAddress    String?      @map("metadata_ip_address")
+  customer             Cliente      @relation(fields: [customerId], references: [id])
+  seller               Seller       @relation(fields: [sellerId], references: [id])
+  items                ItemPedido[]
+
+  @@map("pedido")
+}
+
+model ItemPedido {
+  id        Int     @id @default(autoincrement())
+  orderUuid String  @map("order_uuid")
+  productId String  @map("product_id")
+  quantity  Int
+  unitPrice Decimal @map("unit_price")
+  pedido    Pedido  @relation(fields: [orderUuid], references: [uuid])
+  produto   Produto @relation(fields: [productId], references: [id])
+
+  @@map("item_pedido")
+}
+
+generator erd {
+  provider = "prisma-erd-generator"
+  output   = "DER.svg"
+}
