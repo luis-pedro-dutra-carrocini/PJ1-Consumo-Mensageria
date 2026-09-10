@@ -1,92 +1,122 @@
-datasource db {
-  provider = "postgresql" // Pode alterar para "mysql" ou "sqlite" se preferir
-  url      = env("DATABASE_URL")
-}
-
 generator client {
   provider = "prisma-client-js"
 }
 
-model Cliente {
-  id       Int      @id
-  name     String
-  email    String
-  document String
-  pedidos  Pedido[]
-
-  @@map("cliente")
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
-model Seller {
-  id      Int      @id
-  name    String
-  city    String
-  state   String
-  pedidos Pedido[]
+model Cliente {
+  ClienteId        Int      @id
+  ClienteNome      String   @db.VarChar(100)
+  ClienteEmail     String   @db.VarChar(256)
+  ClienteDocumento String   @db.VarChar(20)
 
-  @@map("seller")
+  Pedido  Pedido[]
+  
+}
+
+model Vendedor {
+  VendedorId      Int       @id
+  VendedorNome    String    @db.VarChar(100)
+  VendedorCidade  String    @db.VarChar(150)
+  VendedorUF      String    @db.VarChar(2)
+  
+  Pedido Pedido[]
+
 }
 
 model Categoria {
-  id               String      @id
-  name             String
-  parentCategoryId String?     @map("parent_category_id")
-  parentCategory   Categoria?  @relation("SubCategorias", fields: [parentCategoryId], references: [id])
-  subCategories    Categoria[] @relation("SubCategorias")
-  produtos         Produto[]
+  CategoriaId   String    @id
+  CategoriaNome String    @db.VarChar(200)
 
-  @@map("categoria")
+  SubCategoria  SubCategoria[]
+
+}
+
+model SubCategoria {
+  SubCategoriaId    String  @id
+  SubCategoriaNome  String  @db.VarChar(200)
+  CategoriaId       String
+
+  Categoria     Categoria   @relation(fields: [CategoriaId], references: [CategoriaId])
+  Produto       Produto[]
+
 }
 
 model Produto {
-  id         String       @id
-  title      String
-  unitPrice  Decimal      @map("unit_price")
-  categoryId String       @map("category_id")
-  categoria  Categoria    @relation(fields: [categoryId], references: [id])
-  items      ItemPedido[]
+  ProdutoId         String      @id
+  ProdutoNome       String      @db.VarChar(200)
+  SubCategoriaId    String
 
-  @@map("produto")
+  SubCategoria  SubCategoria    @relation(fields: [SubCategoriaId], references: [SubCategoriaId])
+  ItemPedido    ItemPedido[]
+
 }
 
 model Pedido {
-  uuid                 String       @id
-  createdAt            DateTime     @map("created_at")
-  indexedAt            DateTime     @default(now()) @map("indexed_at") // Data/hora da indexação exigida
-  channel              String
-  status               String
-  customerId           Int          @map("customer_id")
-  sellerId             Int          @map("seller_id")
-  shipmentCarrier      String?      @map("shipment_carrier")
-  shipmentService      String?      @map("shipment_service")
-  shipmentStatus       String?      @map("shipment_status")
-  shipmentTrackingCode String?      @map("shipment_tracking_code")
-  paymentMethod        String?      @map("payment_method")
-  paymentStatus        String?      @map("payment_status")
-  paymentTransactionId String?      @map("payment_transaction_id")
-  metadataSource       String?      @map("metadata_source")
-  metadataUserAgent    String?      @map("metadata_user_agent")
-  metadataIpAddress    String?      @map("metadata_ip_address")
-  customer             Cliente      @relation(fields: [customerId], references: [id])
-  seller               Seller       @relation(fields: [sellerId], references: [id])
-  items                ItemPedido[]
+  PedidoId             String       @id
+  PedidoDtCriacao      DateTime
+  PedidoDtImportacao   DateTime     @default(now()) // Data/hora da indexação
+  PedidoTipoCriacao    String       @db.VarChar(50)
+  PedidoStatus         String       @db.VarChar(30)
+  PedidoValorTotal     Decimal
+  ClienteId            Int
+  VendedorId           Int
+  
+  Cliente              Cliente      @relation(fields: [ClienteId], references: [ClienteId])
+  Vendedor             Vendedor     @relation(fields: [VendedorId], references: [VendedorId])
+  ItemPedido           ItemPedido[]
+  MetadadosPedido      MetadadosPedido[]
 
-  @@map("pedido")
 }
 
 model ItemPedido {
-  id        Int     @id @default(autoincrement())
-  orderUuid String  @map("order_uuid")
-  productId String  @map("product_id")
-  quantity  Int
-  unitPrice Decimal @map("unit_price")
-  pedido    Pedido  @relation(fields: [orderUuid], references: [uuid])
-  produto   Produto @relation(fields: [productId], references: [id])
+  ItemPedidoId            Int
+  PedidoId                String
+  ProdutoId               String
+  ItemPedidoQuantidade    Int
+  ItemPedidoPrecoUnitario Decimal
+  ItemPedidoValorTotal    Decimal
 
-  @@map("item_pedido")
+  Pedido    Pedido  @relation(fields: [PedidoId], references: [PedidoId])
+  Produto   Produto @relation(fields: [ProdutoId], references: [ProdutoId])
+
+  @@id([ItemPedidoId, PedidoId])
+
 }
 
-generator erd {
-  provider = "prisma-erd-generator"
-  output   = "DER.svg"
+model MetadadosPedido {
+  MetadadosPedidoId       String    @id @default(uuid())
+  PedidoId                String
+  MetadadosSource         String    @db.VarChar(100)
+  MetadadosUserAgent      String    @db.VarChar(150)
+  MetadadosIP             String    @db.VarChar(100)
+
+  Pedido    Pedido  @relation(fields: [PedidoId], references: [PedidoId])
+
+}
+
+model PagamentoPedido {
+  PagamentoPedidoId       String    @id @default(uuid())
+  PedidoId                String
+  PagamentoMetodo         String    @db.VarChar(100)
+  PagamentoStatus         String    @db.VarChar(30)
+  PagamentoTransacao      String    @db.VarChar(200)
+
+  Pedido    Pedido  @relation(fields: [PedidoId], references: [PedidoId])
+
+}
+
+model CarregamentoPedido {
+  CarregamentoPedidoId        String    @id @default(uuid())
+  PedidoId                    String
+  CarregamentoOperadora       String    @db.VarChar(200)
+  CarregamentoServico         String    @db.VarChar(200)
+  CarregamentoStatus          String    @db.VarChar(30)
+  CarregamentoCodigoRastreio  String    @db.VarChar(200)
+
+  Pedido    Pedido  @relation(fields: [PedidoId], references: [PedidoId])
+
 }
