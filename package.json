@@ -5,6 +5,8 @@
   },
   "dependencies": {
     "@prisma/client": "^7.10.0",
-    "prisma": "^8.0.0-rc.13"
+    "prisma": "^8.0.0-rc.13",
+    "@google-cloud/pubsub": "^6.0.1",
+    "dotenv": "^17.4.2"
   }
 }
