@@ -1,9 +1,12 @@
 <mxfile host="Electron">
   <diagram name="Página-1" id="jF9kwgf2xU-zgFgfF6Ax">
-    <mxGraphModel dx="860" dy="529" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1720" dy="1058" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="f8D-XK7jkfEAOm0Sm-z3-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="840" width="1480" x="120" y="200" as="geometry" />
+        </mxCell>
         <mxCell id="v2OeYR7Zi06Dmqg--q1W-2" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="Pedido" vertex="1">
           <mxGeometry height="234" width="200" x="630" y="580" as="geometry" />
         </mxCell>
@@ -130,7 +133,7 @@
         <mxCell id="PcL3PqiSN0saBTm3qtI7-24" parent="PcL3PqiSN0saBTm3qtI7-20" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;text-align: center;&quot;&gt;PagamentoTransacao&lt;/span&gt;: VARCHAR(200)&amp;nbsp;" vertex="1">
           <mxGeometry height="26" width="290" y="104" as="geometry" />
         </mxCell>
-        <mxCell id="PcL3PqiSN0saBTm3qtI7-33" parent="PcL3PqiSN0saBTm3qtI7-20" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); text-align: center;&quot;&gt;PedidoId&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;: UUID - PK&lt;/span&gt;&lt;/div&gt;" vertex="1">
+        <mxCell id="PcL3PqiSN0saBTm3qtI7-33" parent="PcL3PqiSN0saBTm3qtI7-20" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); text-align: center;&quot;&gt;PedidoId&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;: UUID - FK&lt;/span&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="26" width="290" y="130" as="geometry" />
         </mxCell>
         <mxCell id="PcL3PqiSN0saBTm3qtI7-26" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="MetadadosPedido" vertex="1">

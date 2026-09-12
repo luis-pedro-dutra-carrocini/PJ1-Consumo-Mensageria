@@ -1,185 +1,427 @@
 // consumer.js
 const { PubSub } = require('@google-cloud/pubsub');
+const { PrismaClient, Prisma } = require('./prisma/generated/client');
+const { PrismaPg } = require('@prisma/adapter-pg');
 require('dotenv').config();
+
+// Cria o adapter do PostgreSQL
+const adapter = new PrismaPg({ 
+    connectionString: process.env.DATABASE_URL 
+});
+
+// Instancia o PrismaClient com o adapter
+const prisma = new PrismaClient({ adapter });
+const testeValidacao = true;
+
+// Erro específico para indicar que o pedido (ou alguma entidade) já existe
+class DuplicateOrderError extends Error {
+    constructor(entity, id) {
+        super(`Registro duplicado: ${entity} com id=${id} já existe no banco`);
+        this.name = 'DuplicateOrderError';
+        this.entity = entity;
+        this.entityId = id;
+    }
+}
 
 class PubSubConsumer {
 
+    // Construtor
     constructor(projectId, subscriptionName, keyFilename = null) {
-
-        // Configuração do cliente Pub/Sub
-        const config = {
-            projectId: projectId
-        };
-
-        // Se tiver um arquivo de chave de serviço
-        if (keyFilename) {
-            config.keyFilename = keyFilename;
-        }
+        const config = { projectId };
+        if (keyFilename) config.keyFilename = keyFilename;
 
         this.pubsub = new PubSub(config);
         this.subscriptionName = subscriptionName;
         this.subscription = null;
 
+        this.isProcessing = false;
+        this.messageQueue = [];
+        this.processingInterval = 5000;
+        this.errorHandler = null;
     }
 
-    // Inicializa a conexão
+    // Conectando a subscrição
     async initialize() {
         try {
             this.subscription = this.pubsub.subscription(this.subscriptionName);
-            console.log(`Conectado à subscription: ${this.subscriptionName}`);
+            console.log(`✅ Conectado à subscription: ${this.subscriptionName}`);
             return true;
         } catch (error) {
-            console.error('Erro ao inicializar:', error.message);
+            console.error('❌ Erro ao inicializar:', error.message);
             return false;
         }
     }
 
-    // Configura o consumer para receber mensagens
-    async startConsuming(messageHandler, errorHandler = null) {
+    // Método para aguardar
+    sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 
+    // Método para a persistencia dos dados no BD
+    async persistOrder(order) {
+        console.log(`\n💾 Processando pedido ${order.uuid}...`);
+
+        const resultado = await prisma.$transaction(async (tx) => {
+
+            // ============================================================
+            // 0. PEDIDO JÁ EXISTE?
+            // Se sim, é duplicata: não mexe em nada e retorna cedo.
+            // (Caso contrário, duplicaríamos ItemPedido/Metadados/etc.)
+            // ============================================================
+            const pedidoExistente = await tx.pedido.findUnique({
+                where: { PedidoId: order.uuid },
+                select: { PedidoId: true },
+            });
+
+            if (pedidoExistente) {
+                console.log(`⏭️ Pedido ${order.uuid} já existe — nada será alterado.`);
+                return { jaExistia: true, pedido: pedidoExistente };
+            }
+
+            // ============================================================
+            // 1. CLIENTE — cria só se não existir
+            // ============================================================
+            const clienteExistente = await tx.cliente.findUnique({
+                where: { ClienteId: order.customer.id },
+                select: { ClienteId: true },
+            });
+
+            if (clienteExistente) {
+                console.log(`👤 Cliente ${order.customer.id} já existe — mantido.`);
+            } else {
+                const cliente = await tx.cliente.create({
+                    data: {
+                        ClienteId: order.customer.id,
+                        ClienteNome: order.customer.name,
+                        ClienteEmail: order.customer.email,
+                        ClienteDocumento: order.customer.document,
+                    },
+                });
+                console.log(`👤 Cliente criado: ${cliente.ClienteNome} (id=${cliente.ClienteId})`);
+            }
+
+            // ============================================================
+            // 2. VENDEDOR — cria só se não existir
+            // ============================================================
+            const vendedorExistente = await tx.vendedor.findUnique({
+                where: { VendedorId: order.seller.id },
+                select: { VendedorId: true },
+            });
+
+            if (vendedorExistente) {
+                console.log(`🏪 Vendedor ${order.seller.id} já existe — mantido.`);
+            } else {
+                const vendedor = await tx.vendedor.create({
+                    data: {
+                        VendedorId: order.seller.id,
+                        VendedorNome: order.seller.name,
+                        VendedorCidade: order.seller.city,
+                        VendedorUF: order.seller.state,
+                    },
+                });
+                console.log(`🏪 Vendedor criado: ${vendedor.VendedorNome} (id=${vendedor.VendedorId})`);
+            }
+
+            // ============================================================
+            // 3. CATEGORIA / SUBCATEGORIA / PRODUTO — um a um
+            // ============================================================
+            let criados = { cat: 0, sub: 0, prod: 0 };
+            let mantidos = { cat: 0, sub: 0, prod: 0 };
+
+            for (const item of order.items) {
+                const cat = item.category;
+                const sub = cat.sub_category;
+
+                // 3.1 — Categoria
+                const catExistente = await tx.categoria.findUnique({
+                    where: { CategoriaId: cat.id },
+                    select: { CategoriaId: true },
+                });
+                if (catExistente) {
+                    mantidos.cat++;
+                } else {
+                    await tx.categoria.create({
+                        data: { CategoriaId: cat.id, CategoriaNome: cat.name },
+                    });
+                    criados.cat++;
+                }
+
+                // 3.2 — SubCategoria
+                const subExistente = await tx.subCategoria.findUnique({
+                    where: { SubCategoriaId: sub.id },
+                    select: { SubCategoriaId: true },
+                });
+                if (subExistente) {
+                    mantidos.sub++;
+                } else {
+                    await tx.subCategoria.create({
+                        data: {
+                            SubCategoriaId: sub.id,
+                            SubCategoriaNome: sub.name,
+                            CategoriaId: cat.id,
+                        },
+                    });
+                    criados.sub++;
+                }
+
+                // 3.3 — Produto
+                const prodExistente = await tx.produto.findUnique({
+                    where: { ProdutoId: item.product.id },
+                    select: { ProdutoId: true },
+                });
+                if (prodExistente) {
+                    mantidos.prod++;
+                } else {
+                    await tx.produto.create({
+                        data: {
+                            ProdutoId: item.product.id,
+                            ProdutoNome: item.product.title,
+                            SubCategoriaId: sub.id,
+                        },
+                    });
+                    criados.prod++;
+                }
+            }
+
+            console.log(
+                `🏷️ Categorias → ${criados.cat} criada(s), ${mantidos.cat} mantida(s) | ` +
+                `SubCats → ${criados.sub} criada(s), ${mantidos.sub} mantida(s) | ` +
+                `Produtos → ${criados.prod} criado(s), ${mantidos.prod} mantido(s)`
+            );
+
+            // ============================================================
+            // 4. PEDIDO (só chega aqui se não existia antes)
+            // ============================================================
+            const valorTotal = order.items.reduce(
+                (acc, it) => acc + Number(it.unit_price) * Number(it.quantity),
+                0
+            );
+
+            const pedido = await tx.pedido.create({
+                data: {
+                    PedidoId: order.uuid,
+                    PedidoDtCriacao: new Date(order.created_at),
+                    PedidoTipoCriacao: order.channel,
+                    PedidoStatus: order.status,
+                    PedidoValorTotal: new Prisma.Decimal(valorTotal),
+                    ClienteId: order.customer.id,
+                    VendedorId: order.seller.id,
+                },
+            });
+            console.log(`📦 Pedido criado: ${pedido.PedidoId}`);
+
+            // ============================================================
+            // 5. ITENS DO PEDIDO
+            // ============================================================
+            for (const item of order.items) {
+                const valorItem = Number(item.unit_price) * Number(item.quantity);
+                await tx.itemPedido.create({
+                    data: {
+                        ItemPedidoId: item.id,
+                        PedidoId: order.uuid,
+                        ProdutoId: item.product.id,
+                        ItemPedidoQuantidade: item.quantity,
+                        ItemPedidoPrecoUnitario: new Prisma.Decimal(item.unit_price),
+                        ItemPedidoValorTotal: new Prisma.Decimal(valorItem),
+                    },
+                });
+            }
+            console.log(`🛒 ${order.items.length} item(ns) inserido(s)`);
+
+            // ============================================================
+            // 6. METADADOS
+            // ============================================================
+            await tx.metadadosPedido.create({
+                data: {
+                    PedidoId: order.uuid,
+                    MetadadosSource: order.metadata.source,
+                    MetadadosUserAgent: order.metadata.user_agent,
+                    MetadadosIP: order.metadata.ip_address,
+                },
+            });
+
+            // ============================================================
+            // 7. PAGAMENTO
+            // ============================================================
+            await tx.pagamentoPedido.create({
+                data: {
+                    PedidoId: order.uuid,
+                    PagamentoMetodo: order.payment.method,
+                    PagamentoStatus: order.payment.status,
+                    PagamentoTransacao: order.payment.transaction_id,
+                },
+            });
+
+            // ============================================================
+            // 8. CARREGAMENTO
+            // ============================================================
+            await tx.carregamentoPedido.create({
+                data: {
+                    PedidoId: order.uuid,
+                    CarregamentoOperadora: order.shipment.carrier,
+                    CarregamentoServico: order.shipment.service,
+                    CarregamentoStatus: order.shipment.status,
+                    CarregamentoCodigoRastreio: order.shipment.tracking_code,
+                },
+            });
+
+            console.log(`✅ Pedido ${order.uuid} gravado com sucesso`);
+            return { jaExistia: false, pedido };
+        });
+
+        return resultado;
+    }
+
+    // Processamento fila
+    async processQueue() {
+        if (this.isProcessing || this.messageQueue.length === 0) return;
+
+        this.isProcessing = true;
+
+        while (this.messageQueue.length > 0) {
+            const message = this.messageQueue.shift();
+            let processedSuccessfully = false;
+
+            try {
+                const rawData = message.data ? message.data.toString() : null;
+                const messageId = message.id;
+
+                console.log('\n' + '='.repeat(80));
+                console.log(`📨 MENSAGEM RECEBIDA [ID: ${messageId}]`);
+                console.log('='.repeat(80));
+
+                const order = JSON.parse(rawData);
+                console.log(`📄 Pedido: ${order.uuid} | Cliente: ${order.customer.name}`);
+
+                const resultado = await this.persistOrder(order);
+
+                if (resultado.jaExistia) {
+                    console.log(`⏭️  Pedido ${order.uuid} já estava no banco — ignorado (nada foi alterado).`);
+                } else {
+                    console.log(`🎉 Pedido ${order.uuid} processado com sucesso.`);
+                }
+
+                processedSuccessfully = true;
+                console.log('='.repeat(80));
+
+            } catch (error) {
+                console.error(`❌ Erro ao processar mensagem ${message.id}:`, error.message);
+                console.error(error.stack);
+                if (this.errorHandler) this.errorHandler(error, message);
+            }
+
+            // Se processou a mensagem e se não esá em validação
+            if (processedSuccessfully && !testeValidacao) {
+                message.ack();
+                console.log(`✅ MENSAGEM CONFIRMADA [ID: ${message.id}]`);
+            } else {
+                message.nack();
+                console.log(`🔁 MENSAGEM NACKED — será reprocessada [ID: ${message.id}]`);
+            }
+            console.log('='.repeat(80));
+
+            if (this.messageQueue.length > 0) {
+                console.log(`\n⏳ Aguardando 5s para a próxima mensagem...\n`);
+                await this.sleep(this.processingInterval);
+            }
+        }
+
+        this.isProcessing = false;
+        console.log('\n✅ Fila processada. Aguardando novas mensagens...\n');
+    }
+
+    // Consumo
+    async startConsuming(errorHandler = null) {
         if (!this.subscription) {
-            console.error('Subscription não inicializada');
+            console.error('❌ Subscription não inicializada');
             return;
         }
 
-        console.log(`Aguardando mensagens da subscription: ${this.subscriptionName}`);
+        this.errorHandler = errorHandler;
 
-        // Callback para quando receber uma mensagem
+        console.log(`📡 Aguardando mensagens da subscription: ${this.subscriptionName}`);
+        console.log(`💾 Modo: PERSISTÊNCIA (mensagens serão confirmadas após gravar no BD)\n`);
+
         const messageHandlerWrapper = (message) => {
-            try {
+            this.messageQueue.push(message);
+            console.log(`\n📥 Nova mensagem na fila [ID: ${message.id}] — Total: ${this.messageQueue.length}`);
 
-                // Extrai os dados da mensagem
-                const data = message.data ? message.data.toString() : null;
-                const attributes = message.attributes || {};
-                const messageId = message.id;
-
-                console.log(`Mensagem recebida [ID: ${messageId}]`);
-
-                // Processa a mensagem com o handler fornecido
-                const result = messageHandler(data, attributes, message);
-
-                // Se o handler retornar false, não confirma a mensagem
-                if (result === false) {
-                    console.log(`Mensagem ${messageId} não confirmada`);
-                    return;
-                }
-
-                // Confirma que a mensagem foi processada
-                message.ack();
-                console.log(`Mensagem ${messageId} confirmada`);
-
-            } catch (error) {
-
-                console.error(`Erro ao processar mensagem:`, error.message);
-                
-                // Se tiver um handler de erro, executa
-                if (errorHandler) {
-                    errorHandler(error, message);
-                }
-
-            }
+            if (!this.isProcessing) this.processQueue();
         };
 
-        // Inicia o consumo
         this.subscription.on('message', messageHandlerWrapper);
         this.subscription.on('error', (error) => {
-            console.error('Erro na subscription:', error.message);
-            if (errorHandler) {
-                errorHandler(error);
-            }
+            console.error('❌ Erro na subscription:', error.message);
+            if (errorHandler) errorHandler(error);
         });
 
-        // Configura o número máximo de tentativas
         this.subscription.setOptions({
-            maxAckExtension: 600, // 10 minutos
-            ackDeadline: 60 // 60 segundos
+            maxAckExtension: 600,
+            ackDeadline: 120,
+            flowControl: {
+                maxMessages: 1,
+                maxBytes: 10 * 1024 * 1024,
+            },
         });
 
-        console.log('Consumer iniciado com sucesso');
-
+        console.log('✅ Consumer iniciado com sucesso\n');
     }
 
-    // Para o consumo de mensagens
+    // Para consumo
     async stopConsuming() {
         if (this.subscription) {
-            // Remove todos os listeners
             this.subscription.removeAllListeners();
-            console.log('Consumer parado');
+            this.messageQueue = [];
+            this.isProcessing = false;
+            console.log('\n⏹️ Consumer parado');
         }
     }
 
-    // Método para fechar a conexão
+    // Parar consumo e fechar conexão com prisma
     async close() {
         await this.stopConsuming();
-        console.log('Conexão fechada');
+        await prisma.$disconnect();
+        console.log('🔒 Conexão (Pub/Sub + Prisma) fechada');
     }
-
 }
 
-// Teste de uso
+// Main
 async function main() {
-
-    // Configuração - substitua pelos seus dados
     const projectId = process.env.PROJECT_ID;
     const subscriptionName = process.env.SUBSCRIPTION_NAME;
     const keyFilename = process.env.KEY_FILENAME;
 
-    // Cria o consumidor
-    const consumer = new PubSubConsumer(projectId, subscriptionName, keyFilename);
-
-    // Inicializa
-    const initialized = await consumer.initialize();
-    if (!initialized) {
-        console.log('Falha ao inicializar o consumer');
-        return;
+    if (!projectId || !subscriptionName) {
+        console.error('❌ PROJECT_ID e SUBSCRIPTION_NAME são obrigatórios');
+        process.exit(1);
     }
 
-    // Handler para processar mensagens
-    const messageHandler = (data, attributes, message) => {
-        console.log('Dados da mensagem:', data);
-        console.log('Atributos:', attributes);
-        console.log('ID da mensagem:', message.id);
+    const consumer = new PubSubConsumer(projectId, subscriptionName, keyFilename);
 
-        // Seu processamento aqui
-        // Exemplo: se for JSON
-        try {
-            const jsonData = JSON.parse(data);
-            console.log('Dados parseados:', jsonData);
-        } catch (e) {
-            // Não é JSON
-        }
+    if (!(await consumer.initialize())) {
+        console.log('❌ Falha ao inicializar o consumer');
+        process.exit(1);
+    }
 
-        // Retorne false se quiser que a mensagem não seja confirmada
-        return true;
-    };
-
-    // Handler de erro (opcional)
     const errorHandler = (error, message) => {
-        console.error('Erro no processamento:', error.message);
-        if (message) {
-            console.log('Tentando reprocessar mensagem:', message.id);
-            // Aqui você pode implementar lógica de retry
-        }
+        console.error('🚨 Erro:', error.message);
+        if (message) console.error('   Mensagem:', message.id);
     };
 
-    // Inicia o consumo
-    await consumer.startConsuming(messageHandler, errorHandler);
+    await consumer.startConsuming(errorHandler);
 
-    // Mantém o processo rodando
-    console.log('Consumer em execução...');
+    console.log('🔄 Consumer em execução. Ctrl+C para parar.\n');
 
-    // Tratamento para encerramento gracioso
     process.on('SIGINT', async () => {
-        console.log('\nEncerrando...');
+        console.log('\n\n🛑 Encerrando...');
         await consumer.close();
         process.exit(0);
     });
-
 }
 
-// Executa se for o arquivo principal
 if (require.main === module) {
     main().catch(console.error);
 }
 
 module.exports = PubSubConsumer;
+module.exports.DuplicateOrderError = DuplicateOrderError;

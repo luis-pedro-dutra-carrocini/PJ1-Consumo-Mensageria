@@ -1,12 +1,18 @@
 {
   "devDependencies": {
     "@mermaid-js/mermaid-cli": "^11.17.0",
+    "@types/node": "^22.20.2",
+    "prisma": "^7.0.0",
     "prisma-erd-generator": "^3.2.1"
   },
   "dependencies": {
-    "@prisma/client": "^7.10.0",
-    "prisma": "^8.0.0-rc.13",
     "@google-cloud/pubsub": "^6.0.1",
-    "dotenv": "^17.4.2"
+    "@prisma/adapter-pg": "^7.10.0",
+    "@prisma/client": "^7.0.0",
+    "dotenv": "^17.4.2",
+    "pg": "^8.23.0"
+  },
+  "scripts": {
+    "contract:emit": "prisma contract emit"
   }
 }

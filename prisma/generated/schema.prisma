@@ -1,0 +1,114 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Cliente {
+  ClienteId        Int    @id
+  ClienteNome      String @db.VarChar(100)
+  ClienteEmail     String @db.VarChar(256)
+  ClienteDocumento String @db.VarChar(20)
+
+  Pedido Pedido[]
+}
+
+model Vendedor {
+  VendedorId     Int    @id
+  VendedorNome   String @db.VarChar(100)
+  VendedorCidade String @db.VarChar(150)
+  VendedorUF     String @db.VarChar(2)
+
+  Pedido Pedido[]
+}
+
+model Categoria {
+  CategoriaId   String @id
+  CategoriaNome String @db.VarChar(200)
+
+  SubCategoria SubCategoria[]
+}
+
+model SubCategoria {
+  SubCategoriaId   String @id
+  SubCategoriaNome String @db.VarChar(200)
+  CategoriaId      String
+
+  Categoria Categoria @relation(fields: [CategoriaId], references: [CategoriaId])
+  Produto   Produto[]
+}
+
+model Produto {
+  ProdutoId      String @id
+  ProdutoNome    String @db.VarChar(200)
+  SubCategoriaId String
+
+  SubCategoria SubCategoria @relation(fields: [SubCategoriaId], references: [SubCategoriaId])
+  ItemPedido   ItemPedido[]
+}
+
+model Pedido {
+  PedidoId           String   @id
+  PedidoDtCriacao    DateTime
+  PedidoDtImportacao DateTime @default(now()) // Data/hora da indexação
+  PedidoTipoCriacao  String   @db.VarChar(50)
+  PedidoStatus       String   @db.VarChar(30)
+  PedidoValorTotal   Decimal
+  ClienteId          Int
+  VendedorId         Int
+
+  Cliente            Cliente              @relation(fields: [ClienteId], references: [ClienteId])
+  Vendedor           Vendedor             @relation(fields: [VendedorId], references: [VendedorId])
+  ItemPedido         ItemPedido[]
+  MetadadosPedido    MetadadosPedido[]
+  PagamentoPedido    PagamentoPedido[]
+  CarregamentoPedido CarregamentoPedido[]
+}
+
+model ItemPedido {
+  ItemPedidoId            Int
+  PedidoId                String
+  ProdutoId               String
+  ItemPedidoQuantidade    Int
+  ItemPedidoPrecoUnitario Decimal
+  ItemPedidoValorTotal    Decimal
+
+  Pedido  Pedido  @relation(fields: [PedidoId], references: [PedidoId])
+  Produto Produto @relation(fields: [ProdutoId], references: [ProdutoId])
+
+  @@id([ItemPedidoId, PedidoId])
+}
+
+model MetadadosPedido {
+  MetadadosPedidoId  String @id @default(uuid())
+  PedidoId           String
+  MetadadosSource    String @db.VarChar(100)
+  MetadadosUserAgent String @db.VarChar(150)
+  MetadadosIP        String @db.VarChar(100)
+
+  Pedido Pedido @relation(fields: [PedidoId], references: [PedidoId])
+}
+
+model PagamentoPedido {
+  PagamentoPedidoId  String @id @default(uuid())
+  PedidoId           String
+  PagamentoMetodo    String @db.VarChar(100)
+  PagamentoStatus    String @db.VarChar(30)
+  PagamentoTransacao String @db.VarChar(200)
+
+  Pedido Pedido @relation(fields: [PedidoId], references: [PedidoId])
+}
+
+model CarregamentoPedido {
+  CarregamentoPedidoId       String @id @default(uuid())
+  PedidoId                   String
+  CarregamentoOperadora      String @db.VarChar(200)
+  CarregamentoServico        String @db.VarChar(200)
+  CarregamentoStatus         String @db.VarChar(30)
+  CarregamentoCodigoRastreio String @db.VarChar(200)
+
+  Pedido Pedido @relation(fields: [PedidoId], references: [PedidoId])
+}
