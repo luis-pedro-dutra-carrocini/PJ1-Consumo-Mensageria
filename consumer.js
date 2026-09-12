@@ -2,16 +2,18 @@
 const { PubSub } = require('@google-cloud/pubsub');
 const { PrismaClient, Prisma } = require('./prisma/generated/client');
 const { PrismaPg } = require('@prisma/adapter-pg');
+const fs = require('fs');
+const path = require('path');
 require('dotenv').config();
 
 // Cria o adapter do PostgreSQL
-const adapter = new PrismaPg({ 
-    connectionString: process.env.DATABASE_URL 
+const adapter = new PrismaPg({
+    connectionString: process.env.DATABASE_URL
 });
 
 // Instancia o PrismaClient com o adapter
 const prisma = new PrismaClient({ adapter });
-const testeValidacao = true;
+const testeValidacao = false;
 
 // Erro específico para indicar que o pedido (ou alguma entidade) já existe
 class DuplicateOrderError extends Error {
@@ -132,7 +134,7 @@ class PubSubConsumer {
                 const cat = item.category;
                 const sub = cat.sub_category;
 
-                // 3.1 — Categoria
+                // 3.1 — Categoria (PK simples: CategoriaId)
                 const catExistente = await tx.categoria.findUnique({
                     where: { CategoriaId: cat.id },
                     select: { CategoriaId: true },
@@ -146,10 +148,17 @@ class PubSubConsumer {
                     criados.cat++;
                 }
 
-                // 3.2 — SubCategoria
+                // 3.2 — SubCategoria (PK COMPOSTA: [SubCategoriaId, CategoriaId])
+                //     A mesma SubCategoriaId pode existir com CategoriaId diferentes.
+                //     Verificamos pela chave composta.
                 const subExistente = await tx.subCategoria.findUnique({
-                    where: { SubCategoriaId: sub.id },
-                    select: { SubCategoriaId: true },
+                    where: {
+                        SubCategoriaId_CategoriaId: {   // ← nome gerado pelo Prisma para PK composta
+                            SubCategoriaId: sub.id,
+                            CategoriaId: cat.id,
+                        },
+                    },
+                    select: { SubCategoriaId: true, CategoriaId: true },
                 });
                 if (subExistente) {
                     mantidos.sub++;
@@ -164,7 +173,8 @@ class PubSubConsumer {
                     criados.sub++;
                 }
 
-                // 3.3 — Produto
+                // 3.3 — Produto (PK simples: ProdutoId)
+                //     Não tem mais SubCategoriaId — a associação é feita no ItemPedido.
                 const prodExistente = await tx.produto.findUnique({
                     where: { ProdutoId: item.product.id },
                     select: { ProdutoId: true },
@@ -176,7 +186,6 @@ class PubSubConsumer {
                         data: {
                             ProdutoId: item.product.id,
                             ProdutoNome: item.product.title,
-                            SubCategoriaId: sub.id,
                         },
                     });
                     criados.prod++;
@@ -215,11 +224,16 @@ class PubSubConsumer {
             // ============================================================
             for (const item of order.items) {
                 const valorItem = Number(item.unit_price) * Number(item.quantity);
+                const cat = item.category;
+                const sub = cat.sub_category;
+
                 await tx.itemPedido.create({
                     data: {
                         ItemPedidoId: item.id,
                         PedidoId: order.uuid,
                         ProdutoId: item.product.id,
+                        SubCategoriaId: sub.id,
+                        CategoriaId: cat.id,        // ← NOVO campo na FK composta
                         ItemPedidoQuantidade: item.quantity,
                         ItemPedidoPrecoUnitario: new Prisma.Decimal(item.unit_price),
                         ItemPedidoValorTotal: new Prisma.Decimal(valorItem),
@@ -266,6 +280,21 @@ class PubSubConsumer {
             });
 
             console.log(`✅ Pedido ${order.uuid} gravado com sucesso`);
+
+            // ============================================================
+            // 9. GRAVAR JSON PROCESSADO EM ARQUIVO (para conferência)
+            // ============================================================
+            // Somente na fase de testes
+            if (testeValidacao) {
+                // Acrescenta total_item a cada item SEM renomear os campos originais
+                const itensComTotais = order.items.map((it) => ({
+                    ...it,                                                     // mantém o item original intacto
+                    total_item: Number(it.unit_price) * Number(it.quantity),   // só adiciona o total
+                }));
+
+                await this.salvarArquivoProcessado(order, valorTotal, itensComTotais);
+            }
+
             return { jaExistia: false, pedido };
         });
 
@@ -293,10 +322,15 @@ class PubSubConsumer {
                 const order = JSON.parse(rawData);
                 console.log(`📄 Pedido: ${order.uuid} | Cliente: ${order.customer.name}`);
 
+                if (testeValidacao) {
+                    console.log(`📄 Dados Pedido: ${order.uuid} Dados =>`);
+                    console.dir(order, { depth: null, colors: true });
+                }
+
                 const resultado = await this.persistOrder(order);
 
                 if (resultado.jaExistia) {
-                    console.log(`⏭️  Pedido ${order.uuid} já estava no banco — ignorado (nada foi alterado).`);
+                    console.log(`⏭️ Pedido ${order.uuid} já estava no banco — ignorado (nada foi alterado).`);
                 } else {
                     console.log(`🎉 Pedido ${order.uuid} processado com sucesso.`);
                 }
@@ -320,7 +354,8 @@ class PubSubConsumer {
             }
             console.log('='.repeat(80));
 
-            if (this.messageQueue.length > 0) {
+            // Para testes aguardar visualização
+            if (this.messageQueue.length > 0 && testeValidacao) {
                 console.log(`\n⏳ Aguardando 5s para a próxima mensagem...\n`);
                 await this.sleep(this.processingInterval);
             }
@@ -382,6 +417,38 @@ class PubSubConsumer {
         await this.stopConsuming();
         await prisma.$disconnect();
         console.log('🔒 Conexão (Pub/Sub + Prisma) fechada');
+    }
+
+    // Grava o JSON processado em arquivo para conferência / Teste validação
+    async salvarArquivoProcessado(order, valorTotal, itensComTotais) {
+        // Mantém TUDO do JSON original (order) e apenas substitui "items"
+        // pelos itens com o campo total_item adicionado.
+        // Nenhum campo é renomeado, nenhum campo é removido.
+        const payloadProcessado = {
+            ...order,                       // JSON cru original (customer, seller, shipment, payment, metadata, etc.)
+            items: itensComTotais,          // itens originais + total_item
+            totais: {
+                valor_total_pedido: valorTotal,
+                total_itens: itensComTotais.length,
+            },
+            processado_em: new Date().toISOString(),
+        };
+
+        // Pasta onde os arquivos serão salvos
+        const pastaSaida = path.join(__dirname, 'processados');
+        if (!fs.existsSync(pastaSaida)) {
+            fs.mkdirSync(pastaSaida, { recursive: true });
+        }
+
+        // Nome do arquivo: <uuid>_<timestamp>.json
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+        const nomeArquivo = `${order.uuid}_${timestamp}.json`;
+        const caminhoArquivo = path.join(pastaSaida, nomeArquivo);
+
+        fs.writeFileSync(caminhoArquivo, JSON.stringify(payloadProcessado, null, 2), 'utf-8');
+
+        console.log(`📝 Arquivo processado gravado: ${caminhoArquivo}`);
+        return caminhoArquivo;
     }
 }
 

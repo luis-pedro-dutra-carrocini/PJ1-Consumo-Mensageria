@@ -1,0 +1,113 @@
+{
+  "uuid": "f2251cd7-c173-41f2-b654-c2387504fb49",
+  "channel": "mobile_app",
+  "status": "paid",
+  "customer": {
+    "id": 1014,
+    "name": "Gustavo Martins",
+    "email": "gustavo.martins@email.com",
+    "document": "357.486.159-00"
+  },
+  "seller": {
+    "id": 116,
+    "name": "Sul Digital",
+    "city": "Joinville",
+    "state": "SC"
+  },
+  "items": [
+    {
+      "id": 1,
+      "product": {
+        "id": "HOME-002",
+        "title": "Air Fryer Mondial"
+      },
+      "quantity": 4,
+      "category": {
+        "id": "HOME",
+        "name": "Casa",
+        "sub_category": {
+          "id": "KITCHEN",
+          "name": "Cozinha"
+        }
+      },
+      "unit_price": 4551.98,
+      "total_item": 18207.92
+    },
+    {
+      "id": 2,
+      "product": {
+        "id": "HOME-002",
+        "title": "Air Fryer Mondial"
+      },
+      "quantity": 5,
+      "category": {
+        "id": "GAME",
+        "name": "Games",
+        "sub_category": {
+          "id": "ACC",
+          "name": "Acessórios"
+        }
+      },
+      "unit_price": 3283.72,
+      "total_item": 16418.6
+    },
+    {
+      "id": 3,
+      "product": {
+        "id": "HOME-005",
+        "title": "Ventilador Tower"
+      },
+      "quantity": 3,
+      "category": {
+        "id": "ELEC",
+        "name": "Eletrônicos",
+        "sub_category": {
+          "id": "NOTEBOOK",
+          "name": "Notebooks"
+        }
+      },
+      "unit_price": 3769.27,
+      "total_item": 11307.81
+    },
+    {
+      "id": 4,
+      "product": {
+        "id": "GAME-005",
+        "title": "Headset Gamer HyperX"
+      },
+      "quantity": 4,
+      "category": {
+        "id": "GAME",
+        "name": "Games",
+        "sub_category": {
+          "id": "CONSOLE",
+          "name": "Consoles"
+        }
+      },
+      "unit_price": 988.3,
+      "total_item": 3953.2
+    }
+  ],
+  "shipment": {
+    "carrier": "Correios",
+    "service": "Express",
+    "status": "shipped",
+    "tracking_code": "BR162097851"
+  },
+  "payment": {
+    "method": "boleto",
+    "status": "pending",
+    "transaction_id": "pay_956376059"
+  },
+  "metadata": {
+    "source": "web",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+    "ip_address": "10.0.174.25"
+  },
+  "created_at": "2026-09-12T10:51:16.131156Z",
+  "totais": {
+    "valor_total_pedido": 49887.52999999999,
+    "total_itens": 4
+  },
+  "processado_em": "2026-09-12T12:55:34.920Z"
+}

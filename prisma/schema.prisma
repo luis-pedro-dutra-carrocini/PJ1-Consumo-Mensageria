@@ -9,10 +9,11 @@ datasource db {
 
 // customer
 model Cliente {
-  ClienteId        Int      @id               // id
-  ClienteNome      String   @db.VarChar(100)  // name
-  ClienteEmail     String   @db.VarChar(256)  // email
-  ClienteDocumento String   @db.VarChar(20)   // document
+  ClienteId           Int          @id               // id
+  ClienteNome         String       @db.VarChar(100)  // name
+  ClienteEmail        String       @db.VarChar(256)  // email
+  ClienteDocumento    String       @db.VarChar(20)   // document
+  ClienteDtImportacao DateTime     @default(now())   // Data/hora da indexação (não tem no json)
 
   Pedido  Pedido[]
   
@@ -20,10 +21,11 @@ model Cliente {
 
 // seller
 model Vendedor {
-  VendedorId      Int       @id               // id
-  VendedorNome    String    @db.VarChar(100)  // name
-  VendedorCidade  String    @db.VarChar(150)  // city
-  VendedorUF      String    @db.VarChar(2)    // state
+  VendedorId            Int       @id               // id
+  VendedorNome          String    @db.VarChar(100)  // name
+  VendedorCidade        String    @db.VarChar(150)  // city
+  VendedorUF            String    @db.VarChar(2)    // state
+  VendedorDtImportacao  DateTime  @default(now())   // Data/hora da indexação (não tem no json)
   
   Pedido Pedido[]
 
@@ -31,8 +33,9 @@ model Vendedor {
 
 // category
 model Categoria {
-  CategoriaId   String    @id               // id
-  CategoriaNome String    @db.VarChar(200)  // name
+  CategoriaId             String    @id               // id
+  CategoriaNome           String    @db.VarChar(200)  // name
+  CategoriaDtImportacao   DateTime  @default(now())   // Data/hora da indexação (não tem no json)
 
   SubCategoria  SubCategoria[]
 
@@ -40,36 +43,38 @@ model Categoria {
 
 // sub_category
 model SubCategoria {
-  SubCategoriaId    String  @id               // id
-  SubCategoriaNome  String  @db.VarChar(200)  // name
-  CategoriaId       String                    // category/id
+  SubCategoriaId            String                    // id
+  CategoriaId               String                    // category/id
+  SubCategoriaNome          String  @db.VarChar(200)  // name
+  SubCategoriaDtImportacao  DateTime  @default(now()) // Data/hora da indexação (não tem no json)
 
   Categoria     Categoria   @relation(fields: [CategoriaId], references: [CategoriaId])
-  Produto       Produto[]
+  ItemPedido    ItemPedido[]
+
+  @@id([SubCategoriaId, CategoriaId])
 
 }
 
 // product
 model Produto {
-  ProdutoId         String      @id               // id
-  ProdutoNome       String      @db.VarChar(200)  // name
-  SubCategoriaId    String                        // sub_category/id
+  ProdutoId           String      @id               // id
+  ProdutoNome         String      @db.VarChar(200)  // name
+  ProdutoDtImportacao DateTime    @default(now())   // Data/hora da indexação (não tem no json)
 
-  SubCategoria  SubCategoria    @relation(fields: [SubCategoriaId], references: [SubCategoriaId])
   ItemPedido    ItemPedido[]
 
 }
 
 // raiz jason/ order
 model Pedido {
-  PedidoId             String       @id             // uuid
-  PedidoDtCriacao      DateTime                     // created_at
-  PedidoDtImportacao   DateTime     @default(now()) // Data/hora da indexação (não tem no json)
-  PedidoTipoCriacao    String       @db.VarChar(50) // channel
-  PedidoStatus         String       @db.VarChar(30) // status
-  PedidoValorTotal     Decimal                      // total
-  ClienteId            Int                          // customer/id
-  VendedorId           Int                          // seller/id
+  PedidoId             String       @id                 // uuid
+  PedidoDtCriacao      DateTime                         // created_at
+  PedidoDtImportacao   DateTime     @default(now())     // Data/hora da indexação (não tem no json)
+  PedidoTipoCriacao    String       @db.VarChar(50)     // channel
+  PedidoStatus         String       @db.VarChar(30)     // status
+  PedidoValorTotal     Decimal      @db.Decimal(14, 4)  // total
+  ClienteId            Int                              // customer/id
+  VendedorId           Int                              // seller/id
   
   Cliente              Cliente      @relation(fields: [ClienteId], references: [ClienteId])
   Vendedor             Vendedor     @relation(fields: [VendedorId], references: [VendedorId])
@@ -82,15 +87,18 @@ model Pedido {
 
 // items
 model ItemPedido {
-  ItemPedidoId            Int     // id
-  PedidoId                String  // order/uuid
-  ProdutoId               String  // product/id
-  ItemPedidoQuantidade    Int     // quantity
-  ItemPedidoPrecoUnitario Decimal // unit_price
-  ItemPedidoValorTotal    Decimal // total
+  ItemPedidoId            Int                         // id
+  PedidoId                String                      // order/uuid
+  ProdutoId               String                      // product/id
+  ItemPedidoQuantidade    Int                         // quantity
+  ItemPedidoPrecoUnitario Decimal @db.Decimal(14, 4)  // unit_price
+  ItemPedidoValorTotal    Decimal @db.Decimal(14, 4)  // total
+  SubCategoriaId          String                      // sub_category/id
+  CategoriaId             String                      // category/id
 
-  Pedido    Pedido  @relation(fields: [PedidoId], references: [PedidoId])
-  Produto   Produto @relation(fields: [ProdutoId], references: [ProdutoId])
+  Pedido        Pedido        @relation(fields: [PedidoId], references: [PedidoId])
+  Produto       Produto       @relation(fields: [ProdutoId], references: [ProdutoId])
+  SubCategoria  SubCategoria  @relation(fields: [SubCategoriaId, CategoriaId], references: [SubCategoriaId, CategoriaId])
 
   @@id([ItemPedidoId, PedidoId])
 

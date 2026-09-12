@@ -1,0 +1,77 @@
+{
+  "uuid": "32561173-fdee-4164-aa98-59071a696838",
+  "channel": "web",
+  "status": "delivered",
+  "customer": {
+    "id": 1019,
+    "name": "Adriana Melo",
+    "email": "adriana.melo@email.com",
+    "document": "264.135.798-00"
+  },
+  "seller": {
+    "id": 112,
+    "name": "Tech Brasil",
+    "city": "Belém",
+    "state": "PA"
+  },
+  "items": [
+    {
+      "id": 1,
+      "product": {
+        "id": "GAME-002",
+        "title": "Xbox Series X"
+      },
+      "quantity": 1,
+      "category": {
+        "id": "HOME",
+        "name": "Casa",
+        "sub_category": {
+          "id": "KITCHEN",
+          "name": "Cozinha"
+        }
+      },
+      "unit_price": 1172.03,
+      "total_item": 1172.03
+    },
+    {
+      "id": 2,
+      "product": {
+        "id": "ELEC-002",
+        "title": "iPhone 15 Pro Max"
+      },
+      "quantity": 3,
+      "category": {
+        "id": "ELEC",
+        "name": "Eletrônicos",
+        "sub_category": {
+          "id": "PHONE",
+          "name": "Smartphones"
+        }
+      },
+      "unit_price": 812.33,
+      "total_item": 2436.9900000000002
+    }
+  ],
+  "shipment": {
+    "carrier": "Jadlog",
+    "service": "Express",
+    "status": "pending",
+    "tracking_code": "BR764637139"
+  },
+  "payment": {
+    "method": "boleto",
+    "status": "rejected",
+    "transaction_id": "pay_399620821"
+  },
+  "metadata": {
+    "source": "api",
+    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 14)",
+    "ip_address": "10.0.48.180"
+  },
+  "created_at": "2026-09-12T10:51:13.784299Z",
+  "totais": {
+    "valor_total_pedido": 3609.0200000000004,
+    "total_itens": 2
+  },
+  "processado_em": "2026-09-12T12:55:39.971Z"
+}

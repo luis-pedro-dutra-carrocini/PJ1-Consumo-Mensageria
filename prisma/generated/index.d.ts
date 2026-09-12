@@ -1806,11 +1806,11 @@ export namespace Prisma {
    */
 
   export type SubCategoriaCountOutputType = {
-    Produto: number
+    ItemPedido: number
   }
 
   export type SubCategoriaCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Produto?: boolean | SubCategoriaCountOutputTypeCountProdutoArgs
+    ItemPedido?: boolean | SubCategoriaCountOutputTypeCountItemPedidoArgs
   }
 
   // Custom InputTypes
@@ -1827,8 +1827,8 @@ export namespace Prisma {
   /**
    * SubCategoriaCountOutputType without action
    */
-  export type SubCategoriaCountOutputTypeCountProdutoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ProdutoWhereInput
+  export type SubCategoriaCountOutputTypeCountItemPedidoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ItemPedidoWhereInput
   }
 
 
@@ -1950,6 +1950,7 @@ export namespace Prisma {
     ClienteNome: string | null
     ClienteEmail: string | null
     ClienteDocumento: string | null
+    ClienteDtImportacao: Date | null
   }
 
   export type ClienteMaxAggregateOutputType = {
@@ -1957,6 +1958,7 @@ export namespace Prisma {
     ClienteNome: string | null
     ClienteEmail: string | null
     ClienteDocumento: string | null
+    ClienteDtImportacao: Date | null
   }
 
   export type ClienteCountAggregateOutputType = {
@@ -1964,6 +1966,7 @@ export namespace Prisma {
     ClienteNome: number
     ClienteEmail: number
     ClienteDocumento: number
+    ClienteDtImportacao: number
     _all: number
   }
 
@@ -1981,6 +1984,7 @@ export namespace Prisma {
     ClienteNome?: true
     ClienteEmail?: true
     ClienteDocumento?: true
+    ClienteDtImportacao?: true
   }
 
   export type ClienteMaxAggregateInputType = {
@@ -1988,6 +1992,7 @@ export namespace Prisma {
     ClienteNome?: true
     ClienteEmail?: true
     ClienteDocumento?: true
+    ClienteDtImportacao?: true
   }
 
   export type ClienteCountAggregateInputType = {
@@ -1995,6 +2000,7 @@ export namespace Prisma {
     ClienteNome?: true
     ClienteEmail?: true
     ClienteDocumento?: true
+    ClienteDtImportacao?: true
     _all?: true
   }
 
@@ -2089,6 +2095,7 @@ export namespace Prisma {
     ClienteNome: string
     ClienteEmail: string
     ClienteDocumento: string
+    ClienteDtImportacao: Date
     _count: ClienteCountAggregateOutputType | null
     _avg: ClienteAvgAggregateOutputType | null
     _sum: ClienteSumAggregateOutputType | null
@@ -2115,6 +2122,7 @@ export namespace Prisma {
     ClienteNome?: boolean
     ClienteEmail?: boolean
     ClienteDocumento?: boolean
+    ClienteDtImportacao?: boolean
     Pedido?: boolean | Cliente$PedidoArgs<ExtArgs>
     _count?: boolean | ClienteCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["cliente"]>
@@ -2124,6 +2132,7 @@ export namespace Prisma {
     ClienteNome?: boolean
     ClienteEmail?: boolean
     ClienteDocumento?: boolean
+    ClienteDtImportacao?: boolean
   }, ExtArgs["result"]["cliente"]>
 
   export type ClienteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2131,6 +2140,7 @@ export namespace Prisma {
     ClienteNome?: boolean
     ClienteEmail?: boolean
     ClienteDocumento?: boolean
+    ClienteDtImportacao?: boolean
   }, ExtArgs["result"]["cliente"]>
 
   export type ClienteSelectScalar = {
@@ -2138,9 +2148,10 @@ export namespace Prisma {
     ClienteNome?: boolean
     ClienteEmail?: boolean
     ClienteDocumento?: boolean
+    ClienteDtImportacao?: boolean
   }
 
-  export type ClienteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ClienteId" | "ClienteNome" | "ClienteEmail" | "ClienteDocumento", ExtArgs["result"]["cliente"]>
+  export type ClienteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ClienteId" | "ClienteNome" | "ClienteEmail" | "ClienteDocumento" | "ClienteDtImportacao", ExtArgs["result"]["cliente"]>
   export type ClienteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Pedido?: boolean | Cliente$PedidoArgs<ExtArgs>
     _count?: boolean | ClienteCountOutputTypeDefaultArgs<ExtArgs>
@@ -2158,6 +2169,7 @@ export namespace Prisma {
       ClienteNome: string
       ClienteEmail: string
       ClienteDocumento: string
+      ClienteDtImportacao: Date
     }, ExtArgs["result"]["cliente"]>
     composites: {}
   }
@@ -2586,6 +2598,7 @@ export namespace Prisma {
     readonly ClienteNome: FieldRef<"Cliente", 'String'>
     readonly ClienteEmail: FieldRef<"Cliente", 'String'>
     readonly ClienteDocumento: FieldRef<"Cliente", 'String'>
+    readonly ClienteDtImportacao: FieldRef<"Cliente", 'DateTime'>
   }
     
 
@@ -3046,6 +3059,7 @@ export namespace Prisma {
     VendedorNome: string | null
     VendedorCidade: string | null
     VendedorUF: string | null
+    VendedorDtImportacao: Date | null
   }
 
   export type VendedorMaxAggregateOutputType = {
@@ -3053,6 +3067,7 @@ export namespace Prisma {
     VendedorNome: string | null
     VendedorCidade: string | null
     VendedorUF: string | null
+    VendedorDtImportacao: Date | null
   }
 
   export type VendedorCountAggregateOutputType = {
@@ -3060,6 +3075,7 @@ export namespace Prisma {
     VendedorNome: number
     VendedorCidade: number
     VendedorUF: number
+    VendedorDtImportacao: number
     _all: number
   }
 
@@ -3077,6 +3093,7 @@ export namespace Prisma {
     VendedorNome?: true
     VendedorCidade?: true
     VendedorUF?: true
+    VendedorDtImportacao?: true
   }
 
   export type VendedorMaxAggregateInputType = {
@@ -3084,6 +3101,7 @@ export namespace Prisma {
     VendedorNome?: true
     VendedorCidade?: true
     VendedorUF?: true
+    VendedorDtImportacao?: true
   }
 
   export type VendedorCountAggregateInputType = {
@@ -3091,6 +3109,7 @@ export namespace Prisma {
     VendedorNome?: true
     VendedorCidade?: true
     VendedorUF?: true
+    VendedorDtImportacao?: true
     _all?: true
   }
 
@@ -3185,6 +3204,7 @@ export namespace Prisma {
     VendedorNome: string
     VendedorCidade: string
     VendedorUF: string
+    VendedorDtImportacao: Date
     _count: VendedorCountAggregateOutputType | null
     _avg: VendedorAvgAggregateOutputType | null
     _sum: VendedorSumAggregateOutputType | null
@@ -3211,6 +3231,7 @@ export namespace Prisma {
     VendedorNome?: boolean
     VendedorCidade?: boolean
     VendedorUF?: boolean
+    VendedorDtImportacao?: boolean
     Pedido?: boolean | Vendedor$PedidoArgs<ExtArgs>
     _count?: boolean | VendedorCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["vendedor"]>
@@ -3220,6 +3241,7 @@ export namespace Prisma {
     VendedorNome?: boolean
     VendedorCidade?: boolean
     VendedorUF?: boolean
+    VendedorDtImportacao?: boolean
   }, ExtArgs["result"]["vendedor"]>
 
   export type VendedorSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3227,6 +3249,7 @@ export namespace Prisma {
     VendedorNome?: boolean
     VendedorCidade?: boolean
     VendedorUF?: boolean
+    VendedorDtImportacao?: boolean
   }, ExtArgs["result"]["vendedor"]>
 
   export type VendedorSelectScalar = {
@@ -3234,9 +3257,10 @@ export namespace Prisma {
     VendedorNome?: boolean
     VendedorCidade?: boolean
     VendedorUF?: boolean
+    VendedorDtImportacao?: boolean
   }
 
-  export type VendedorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"VendedorId" | "VendedorNome" | "VendedorCidade" | "VendedorUF", ExtArgs["result"]["vendedor"]>
+  export type VendedorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"VendedorId" | "VendedorNome" | "VendedorCidade" | "VendedorUF" | "VendedorDtImportacao", ExtArgs["result"]["vendedor"]>
   export type VendedorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Pedido?: boolean | Vendedor$PedidoArgs<ExtArgs>
     _count?: boolean | VendedorCountOutputTypeDefaultArgs<ExtArgs>
@@ -3254,6 +3278,7 @@ export namespace Prisma {
       VendedorNome: string
       VendedorCidade: string
       VendedorUF: string
+      VendedorDtImportacao: Date
     }, ExtArgs["result"]["vendedor"]>
     composites: {}
   }
@@ -3682,6 +3707,7 @@ export namespace Prisma {
     readonly VendedorNome: FieldRef<"Vendedor", 'String'>
     readonly VendedorCidade: FieldRef<"Vendedor", 'String'>
     readonly VendedorUF: FieldRef<"Vendedor", 'String'>
+    readonly VendedorDtImportacao: FieldRef<"Vendedor", 'DateTime'>
   }
     
 
@@ -4130,16 +4156,19 @@ export namespace Prisma {
   export type CategoriaMinAggregateOutputType = {
     CategoriaId: string | null
     CategoriaNome: string | null
+    CategoriaDtImportacao: Date | null
   }
 
   export type CategoriaMaxAggregateOutputType = {
     CategoriaId: string | null
     CategoriaNome: string | null
+    CategoriaDtImportacao: Date | null
   }
 
   export type CategoriaCountAggregateOutputType = {
     CategoriaId: number
     CategoriaNome: number
+    CategoriaDtImportacao: number
     _all: number
   }
 
@@ -4147,16 +4176,19 @@ export namespace Prisma {
   export type CategoriaMinAggregateInputType = {
     CategoriaId?: true
     CategoriaNome?: true
+    CategoriaDtImportacao?: true
   }
 
   export type CategoriaMaxAggregateInputType = {
     CategoriaId?: true
     CategoriaNome?: true
+    CategoriaDtImportacao?: true
   }
 
   export type CategoriaCountAggregateInputType = {
     CategoriaId?: true
     CategoriaNome?: true
+    CategoriaDtImportacao?: true
     _all?: true
   }
 
@@ -4235,6 +4267,7 @@ export namespace Prisma {
   export type CategoriaGroupByOutputType = {
     CategoriaId: string
     CategoriaNome: string
+    CategoriaDtImportacao: Date
     _count: CategoriaCountAggregateOutputType | null
     _min: CategoriaMinAggregateOutputType | null
     _max: CategoriaMaxAggregateOutputType | null
@@ -4257,6 +4290,7 @@ export namespace Prisma {
   export type CategoriaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     CategoriaId?: boolean
     CategoriaNome?: boolean
+    CategoriaDtImportacao?: boolean
     SubCategoria?: boolean | Categoria$SubCategoriaArgs<ExtArgs>
     _count?: boolean | CategoriaCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["categoria"]>
@@ -4264,19 +4298,22 @@ export namespace Prisma {
   export type CategoriaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     CategoriaId?: boolean
     CategoriaNome?: boolean
+    CategoriaDtImportacao?: boolean
   }, ExtArgs["result"]["categoria"]>
 
   export type CategoriaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     CategoriaId?: boolean
     CategoriaNome?: boolean
+    CategoriaDtImportacao?: boolean
   }, ExtArgs["result"]["categoria"]>
 
   export type CategoriaSelectScalar = {
     CategoriaId?: boolean
     CategoriaNome?: boolean
+    CategoriaDtImportacao?: boolean
   }
 
-  export type CategoriaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"CategoriaId" | "CategoriaNome", ExtArgs["result"]["categoria"]>
+  export type CategoriaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"CategoriaId" | "CategoriaNome" | "CategoriaDtImportacao", ExtArgs["result"]["categoria"]>
   export type CategoriaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     SubCategoria?: boolean | Categoria$SubCategoriaArgs<ExtArgs>
     _count?: boolean | CategoriaCountOutputTypeDefaultArgs<ExtArgs>
@@ -4292,6 +4329,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       CategoriaId: string
       CategoriaNome: string
+      CategoriaDtImportacao: Date
     }, ExtArgs["result"]["categoria"]>
     composites: {}
   }
@@ -4718,6 +4756,7 @@ export namespace Prisma {
   interface CategoriaFieldRefs {
     readonly CategoriaId: FieldRef<"Categoria", 'String'>
     readonly CategoriaNome: FieldRef<"Categoria", 'String'>
+    readonly CategoriaDtImportacao: FieldRef<"Categoria", 'DateTime'>
   }
     
 
@@ -5165,40 +5204,46 @@ export namespace Prisma {
 
   export type SubCategoriaMinAggregateOutputType = {
     SubCategoriaId: string | null
-    SubCategoriaNome: string | null
     CategoriaId: string | null
+    SubCategoriaNome: string | null
+    SubCategoriaDtImportacao: Date | null
   }
 
   export type SubCategoriaMaxAggregateOutputType = {
     SubCategoriaId: string | null
-    SubCategoriaNome: string | null
     CategoriaId: string | null
+    SubCategoriaNome: string | null
+    SubCategoriaDtImportacao: Date | null
   }
 
   export type SubCategoriaCountAggregateOutputType = {
     SubCategoriaId: number
-    SubCategoriaNome: number
     CategoriaId: number
+    SubCategoriaNome: number
+    SubCategoriaDtImportacao: number
     _all: number
   }
 
 
   export type SubCategoriaMinAggregateInputType = {
     SubCategoriaId?: true
-    SubCategoriaNome?: true
     CategoriaId?: true
+    SubCategoriaNome?: true
+    SubCategoriaDtImportacao?: true
   }
 
   export type SubCategoriaMaxAggregateInputType = {
     SubCategoriaId?: true
-    SubCategoriaNome?: true
     CategoriaId?: true
+    SubCategoriaNome?: true
+    SubCategoriaDtImportacao?: true
   }
 
   export type SubCategoriaCountAggregateInputType = {
     SubCategoriaId?: true
-    SubCategoriaNome?: true
     CategoriaId?: true
+    SubCategoriaNome?: true
+    SubCategoriaDtImportacao?: true
     _all?: true
   }
 
@@ -5276,8 +5321,9 @@ export namespace Prisma {
 
   export type SubCategoriaGroupByOutputType = {
     SubCategoriaId: string
-    SubCategoriaNome: string
     CategoriaId: string
+    SubCategoriaNome: string
+    SubCategoriaDtImportacao: Date
     _count: SubCategoriaCountAggregateOutputType | null
     _min: SubCategoriaMinAggregateOutputType | null
     _max: SubCategoriaMaxAggregateOutputType | null
@@ -5299,37 +5345,41 @@ export namespace Prisma {
 
   export type SubCategoriaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     SubCategoriaId?: boolean
-    SubCategoriaNome?: boolean
     CategoriaId?: boolean
+    SubCategoriaNome?: boolean
+    SubCategoriaDtImportacao?: boolean
     Categoria?: boolean | CategoriaDefaultArgs<ExtArgs>
-    Produto?: boolean | SubCategoria$ProdutoArgs<ExtArgs>
+    ItemPedido?: boolean | SubCategoria$ItemPedidoArgs<ExtArgs>
     _count?: boolean | SubCategoriaCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["subCategoria"]>
 
   export type SubCategoriaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     SubCategoriaId?: boolean
-    SubCategoriaNome?: boolean
     CategoriaId?: boolean
+    SubCategoriaNome?: boolean
+    SubCategoriaDtImportacao?: boolean
     Categoria?: boolean | CategoriaDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["subCategoria"]>
 
   export type SubCategoriaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     SubCategoriaId?: boolean
-    SubCategoriaNome?: boolean
     CategoriaId?: boolean
+    SubCategoriaNome?: boolean
+    SubCategoriaDtImportacao?: boolean
     Categoria?: boolean | CategoriaDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["subCategoria"]>
 
   export type SubCategoriaSelectScalar = {
     SubCategoriaId?: boolean
-    SubCategoriaNome?: boolean
     CategoriaId?: boolean
+    SubCategoriaNome?: boolean
+    SubCategoriaDtImportacao?: boolean
   }
 
-  export type SubCategoriaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"SubCategoriaId" | "SubCategoriaNome" | "CategoriaId", ExtArgs["result"]["subCategoria"]>
+  export type SubCategoriaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"SubCategoriaId" | "CategoriaId" | "SubCategoriaNome" | "SubCategoriaDtImportacao", ExtArgs["result"]["subCategoria"]>
   export type SubCategoriaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Categoria?: boolean | CategoriaDefaultArgs<ExtArgs>
-    Produto?: boolean | SubCategoria$ProdutoArgs<ExtArgs>
+    ItemPedido?: boolean | SubCategoria$ItemPedidoArgs<ExtArgs>
     _count?: boolean | SubCategoriaCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type SubCategoriaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5343,12 +5393,13 @@ export namespace Prisma {
     name: "SubCategoria"
     objects: {
       Categoria: Prisma.$CategoriaPayload<ExtArgs>
-      Produto: Prisma.$ProdutoPayload<ExtArgs>[]
+      ItemPedido: Prisma.$ItemPedidoPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       SubCategoriaId: string
-      SubCategoriaNome: string
       CategoriaId: string
+      SubCategoriaNome: string
+      SubCategoriaDtImportacao: Date
     }, ExtArgs["result"]["subCategoria"]>
     composites: {}
   }
@@ -5744,7 +5795,7 @@ export namespace Prisma {
   export interface Prisma__SubCategoriaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     Categoria<T extends CategoriaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CategoriaDefaultArgs<ExtArgs>>): Prisma__CategoriaClient<$Result.GetResult<Prisma.$CategoriaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    Produto<T extends SubCategoria$ProdutoArgs<ExtArgs> = {}>(args?: Subset<T, SubCategoria$ProdutoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProdutoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ItemPedido<T extends SubCategoria$ItemPedidoArgs<ExtArgs> = {}>(args?: Subset<T, SubCategoria$ItemPedidoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemPedidoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5775,8 +5826,9 @@ export namespace Prisma {
    */
   interface SubCategoriaFieldRefs {
     readonly SubCategoriaId: FieldRef<"SubCategoria", 'String'>
-    readonly SubCategoriaNome: FieldRef<"SubCategoria", 'String'>
     readonly CategoriaId: FieldRef<"SubCategoria", 'String'>
+    readonly SubCategoriaNome: FieldRef<"SubCategoria", 'String'>
+    readonly SubCategoriaDtImportacao: FieldRef<"SubCategoria", 'DateTime'>
   }
     
 
@@ -6178,27 +6230,27 @@ export namespace Prisma {
   }
 
   /**
-   * SubCategoria.Produto
+   * SubCategoria.ItemPedido
    */
-  export type SubCategoria$ProdutoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SubCategoria$ItemPedidoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Produto
+     * Select specific fields to fetch from the ItemPedido
      */
-    select?: ProdutoSelect<ExtArgs> | null
+    select?: ItemPedidoSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Produto
+     * Omit specific fields from the ItemPedido
      */
-    omit?: ProdutoOmit<ExtArgs> | null
+    omit?: ItemPedidoOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProdutoInclude<ExtArgs> | null
-    where?: ProdutoWhereInput
-    orderBy?: ProdutoOrderByWithRelationInput | ProdutoOrderByWithRelationInput[]
-    cursor?: ProdutoWhereUniqueInput
+    include?: ItemPedidoInclude<ExtArgs> | null
+    where?: ItemPedidoWhereInput
+    orderBy?: ItemPedidoOrderByWithRelationInput | ItemPedidoOrderByWithRelationInput[]
+    cursor?: ItemPedidoWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: ProdutoScalarFieldEnum | ProdutoScalarFieldEnum[]
+    distinct?: ItemPedidoScalarFieldEnum | ItemPedidoScalarFieldEnum[]
   }
 
   /**
@@ -6233,19 +6285,19 @@ export namespace Prisma {
   export type ProdutoMinAggregateOutputType = {
     ProdutoId: string | null
     ProdutoNome: string | null
-    SubCategoriaId: string | null
+    ProdutoDtImportacao: Date | null
   }
 
   export type ProdutoMaxAggregateOutputType = {
     ProdutoId: string | null
     ProdutoNome: string | null
-    SubCategoriaId: string | null
+    ProdutoDtImportacao: Date | null
   }
 
   export type ProdutoCountAggregateOutputType = {
     ProdutoId: number
     ProdutoNome: number
-    SubCategoriaId: number
+    ProdutoDtImportacao: number
     _all: number
   }
 
@@ -6253,19 +6305,19 @@ export namespace Prisma {
   export type ProdutoMinAggregateInputType = {
     ProdutoId?: true
     ProdutoNome?: true
-    SubCategoriaId?: true
+    ProdutoDtImportacao?: true
   }
 
   export type ProdutoMaxAggregateInputType = {
     ProdutoId?: true
     ProdutoNome?: true
-    SubCategoriaId?: true
+    ProdutoDtImportacao?: true
   }
 
   export type ProdutoCountAggregateInputType = {
     ProdutoId?: true
     ProdutoNome?: true
-    SubCategoriaId?: true
+    ProdutoDtImportacao?: true
     _all?: true
   }
 
@@ -6344,7 +6396,7 @@ export namespace Prisma {
   export type ProdutoGroupByOutputType = {
     ProdutoId: string
     ProdutoNome: string
-    SubCategoriaId: string
+    ProdutoDtImportacao: Date
     _count: ProdutoCountAggregateOutputType | null
     _min: ProdutoMinAggregateOutputType | null
     _max: ProdutoMaxAggregateOutputType | null
@@ -6367,8 +6419,7 @@ export namespace Prisma {
   export type ProdutoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     ProdutoId?: boolean
     ProdutoNome?: boolean
-    SubCategoriaId?: boolean
-    SubCategoria?: boolean | SubCategoriaDefaultArgs<ExtArgs>
+    ProdutoDtImportacao?: boolean
     ItemPedido?: boolean | Produto$ItemPedidoArgs<ExtArgs>
     _count?: boolean | ProdutoCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["produto"]>
@@ -6376,46 +6427,38 @@ export namespace Prisma {
   export type ProdutoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     ProdutoId?: boolean
     ProdutoNome?: boolean
-    SubCategoriaId?: boolean
-    SubCategoria?: boolean | SubCategoriaDefaultArgs<ExtArgs>
+    ProdutoDtImportacao?: boolean
   }, ExtArgs["result"]["produto"]>
 
   export type ProdutoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     ProdutoId?: boolean
     ProdutoNome?: boolean
-    SubCategoriaId?: boolean
-    SubCategoria?: boolean | SubCategoriaDefaultArgs<ExtArgs>
+    ProdutoDtImportacao?: boolean
   }, ExtArgs["result"]["produto"]>
 
   export type ProdutoSelectScalar = {
     ProdutoId?: boolean
     ProdutoNome?: boolean
-    SubCategoriaId?: boolean
+    ProdutoDtImportacao?: boolean
   }
 
-  export type ProdutoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ProdutoId" | "ProdutoNome" | "SubCategoriaId", ExtArgs["result"]["produto"]>
+  export type ProdutoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ProdutoId" | "ProdutoNome" | "ProdutoDtImportacao", ExtArgs["result"]["produto"]>
   export type ProdutoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    SubCategoria?: boolean | SubCategoriaDefaultArgs<ExtArgs>
     ItemPedido?: boolean | Produto$ItemPedidoArgs<ExtArgs>
     _count?: boolean | ProdutoCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type ProdutoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    SubCategoria?: boolean | SubCategoriaDefaultArgs<ExtArgs>
-  }
-  export type ProdutoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    SubCategoria?: boolean | SubCategoriaDefaultArgs<ExtArgs>
-  }
+  export type ProdutoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ProdutoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $ProdutoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Produto"
     objects: {
-      SubCategoria: Prisma.$SubCategoriaPayload<ExtArgs>
       ItemPedido: Prisma.$ItemPedidoPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       ProdutoId: string
       ProdutoNome: string
-      SubCategoriaId: string
+      ProdutoDtImportacao: Date
     }, ExtArgs["result"]["produto"]>
     composites: {}
   }
@@ -6810,7 +6853,6 @@ export namespace Prisma {
    */
   export interface Prisma__ProdutoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    SubCategoria<T extends SubCategoriaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SubCategoriaDefaultArgs<ExtArgs>>): Prisma__SubCategoriaClient<$Result.GetResult<Prisma.$SubCategoriaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     ItemPedido<T extends Produto$ItemPedidoArgs<ExtArgs> = {}>(args?: Subset<T, Produto$ItemPedidoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemPedidoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -6843,7 +6885,7 @@ export namespace Prisma {
   interface ProdutoFieldRefs {
     readonly ProdutoId: FieldRef<"Produto", 'String'>
     readonly ProdutoNome: FieldRef<"Produto", 'String'>
-    readonly SubCategoriaId: FieldRef<"Produto", 'String'>
+    readonly ProdutoDtImportacao: FieldRef<"Produto", 'DateTime'>
   }
     
 
@@ -7098,10 +7140,6 @@ export namespace Prisma {
      */
     data: ProdutoCreateManyInput | ProdutoCreateManyInput[]
     skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProdutoIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -7172,10 +7210,6 @@ export namespace Prisma {
      * Limit how many Produtos to update.
      */
     limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProdutoIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -8586,6 +8620,8 @@ export namespace Prisma {
     ItemPedidoQuantidade: number | null
     ItemPedidoPrecoUnitario: Decimal | null
     ItemPedidoValorTotal: Decimal | null
+    SubCategoriaId: string | null
+    CategoriaId: string | null
   }
 
   export type ItemPedidoMaxAggregateOutputType = {
@@ -8595,6 +8631,8 @@ export namespace Prisma {
     ItemPedidoQuantidade: number | null
     ItemPedidoPrecoUnitario: Decimal | null
     ItemPedidoValorTotal: Decimal | null
+    SubCategoriaId: string | null
+    CategoriaId: string | null
   }
 
   export type ItemPedidoCountAggregateOutputType = {
@@ -8604,6 +8642,8 @@ export namespace Prisma {
     ItemPedidoQuantidade: number
     ItemPedidoPrecoUnitario: number
     ItemPedidoValorTotal: number
+    SubCategoriaId: number
+    CategoriaId: number
     _all: number
   }
 
@@ -8629,6 +8669,8 @@ export namespace Prisma {
     ItemPedidoQuantidade?: true
     ItemPedidoPrecoUnitario?: true
     ItemPedidoValorTotal?: true
+    SubCategoriaId?: true
+    CategoriaId?: true
   }
 
   export type ItemPedidoMaxAggregateInputType = {
@@ -8638,6 +8680,8 @@ export namespace Prisma {
     ItemPedidoQuantidade?: true
     ItemPedidoPrecoUnitario?: true
     ItemPedidoValorTotal?: true
+    SubCategoriaId?: true
+    CategoriaId?: true
   }
 
   export type ItemPedidoCountAggregateInputType = {
@@ -8647,6 +8691,8 @@ export namespace Prisma {
     ItemPedidoQuantidade?: true
     ItemPedidoPrecoUnitario?: true
     ItemPedidoValorTotal?: true
+    SubCategoriaId?: true
+    CategoriaId?: true
     _all?: true
   }
 
@@ -8743,6 +8789,8 @@ export namespace Prisma {
     ItemPedidoQuantidade: number
     ItemPedidoPrecoUnitario: Decimal
     ItemPedidoValorTotal: Decimal
+    SubCategoriaId: string
+    CategoriaId: string
     _count: ItemPedidoCountAggregateOutputType | null
     _avg: ItemPedidoAvgAggregateOutputType | null
     _sum: ItemPedidoSumAggregateOutputType | null
@@ -8771,8 +8819,11 @@ export namespace Prisma {
     ItemPedidoQuantidade?: boolean
     ItemPedidoPrecoUnitario?: boolean
     ItemPedidoValorTotal?: boolean
+    SubCategoriaId?: boolean
+    CategoriaId?: boolean
     Pedido?: boolean | PedidoDefaultArgs<ExtArgs>
     Produto?: boolean | ProdutoDefaultArgs<ExtArgs>
+    SubCategoria?: boolean | SubCategoriaDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["itemPedido"]>
 
   export type ItemPedidoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -8782,8 +8833,11 @@ export namespace Prisma {
     ItemPedidoQuantidade?: boolean
     ItemPedidoPrecoUnitario?: boolean
     ItemPedidoValorTotal?: boolean
+    SubCategoriaId?: boolean
+    CategoriaId?: boolean
     Pedido?: boolean | PedidoDefaultArgs<ExtArgs>
     Produto?: boolean | ProdutoDefaultArgs<ExtArgs>
+    SubCategoria?: boolean | SubCategoriaDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["itemPedido"]>
 
   export type ItemPedidoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -8793,8 +8847,11 @@ export namespace Prisma {
     ItemPedidoQuantidade?: boolean
     ItemPedidoPrecoUnitario?: boolean
     ItemPedidoValorTotal?: boolean
+    SubCategoriaId?: boolean
+    CategoriaId?: boolean
     Pedido?: boolean | PedidoDefaultArgs<ExtArgs>
     Produto?: boolean | ProdutoDefaultArgs<ExtArgs>
+    SubCategoria?: boolean | SubCategoriaDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["itemPedido"]>
 
   export type ItemPedidoSelectScalar = {
@@ -8804,20 +8861,25 @@ export namespace Prisma {
     ItemPedidoQuantidade?: boolean
     ItemPedidoPrecoUnitario?: boolean
     ItemPedidoValorTotal?: boolean
+    SubCategoriaId?: boolean
+    CategoriaId?: boolean
   }
 
-  export type ItemPedidoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ItemPedidoId" | "PedidoId" | "ProdutoId" | "ItemPedidoQuantidade" | "ItemPedidoPrecoUnitario" | "ItemPedidoValorTotal", ExtArgs["result"]["itemPedido"]>
+  export type ItemPedidoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ItemPedidoId" | "PedidoId" | "ProdutoId" | "ItemPedidoQuantidade" | "ItemPedidoPrecoUnitario" | "ItemPedidoValorTotal" | "SubCategoriaId" | "CategoriaId", ExtArgs["result"]["itemPedido"]>
   export type ItemPedidoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Pedido?: boolean | PedidoDefaultArgs<ExtArgs>
     Produto?: boolean | ProdutoDefaultArgs<ExtArgs>
+    SubCategoria?: boolean | SubCategoriaDefaultArgs<ExtArgs>
   }
   export type ItemPedidoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Pedido?: boolean | PedidoDefaultArgs<ExtArgs>
     Produto?: boolean | ProdutoDefaultArgs<ExtArgs>
+    SubCategoria?: boolean | SubCategoriaDefaultArgs<ExtArgs>
   }
   export type ItemPedidoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Pedido?: boolean | PedidoDefaultArgs<ExtArgs>
     Produto?: boolean | ProdutoDefaultArgs<ExtArgs>
+    SubCategoria?: boolean | SubCategoriaDefaultArgs<ExtArgs>
   }
 
   export type $ItemPedidoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8825,6 +8887,7 @@ export namespace Prisma {
     objects: {
       Pedido: Prisma.$PedidoPayload<ExtArgs>
       Produto: Prisma.$ProdutoPayload<ExtArgs>
+      SubCategoria: Prisma.$SubCategoriaPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       ItemPedidoId: number
@@ -8833,6 +8896,8 @@ export namespace Prisma {
       ItemPedidoQuantidade: number
       ItemPedidoPrecoUnitario: Prisma.Decimal
       ItemPedidoValorTotal: Prisma.Decimal
+      SubCategoriaId: string
+      CategoriaId: string
     }, ExtArgs["result"]["itemPedido"]>
     composites: {}
   }
@@ -9229,6 +9294,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     Pedido<T extends PedidoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PedidoDefaultArgs<ExtArgs>>): Prisma__PedidoClient<$Result.GetResult<Prisma.$PedidoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     Produto<T extends ProdutoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProdutoDefaultArgs<ExtArgs>>): Prisma__ProdutoClient<$Result.GetResult<Prisma.$ProdutoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    SubCategoria<T extends SubCategoriaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SubCategoriaDefaultArgs<ExtArgs>>): Prisma__SubCategoriaClient<$Result.GetResult<Prisma.$SubCategoriaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9264,6 +9330,8 @@ export namespace Prisma {
     readonly ItemPedidoQuantidade: FieldRef<"ItemPedido", 'Int'>
     readonly ItemPedidoPrecoUnitario: FieldRef<"ItemPedido", 'Decimal'>
     readonly ItemPedidoValorTotal: FieldRef<"ItemPedido", 'Decimal'>
+    readonly SubCategoriaId: FieldRef<"ItemPedido", 'String'>
+    readonly CategoriaId: FieldRef<"ItemPedido", 'String'>
   }
     
 
@@ -12903,7 +12971,8 @@ export namespace Prisma {
     ClienteId: 'ClienteId',
     ClienteNome: 'ClienteNome',
     ClienteEmail: 'ClienteEmail',
-    ClienteDocumento: 'ClienteDocumento'
+    ClienteDocumento: 'ClienteDocumento',
+    ClienteDtImportacao: 'ClienteDtImportacao'
   };
 
   export type ClienteScalarFieldEnum = (typeof ClienteScalarFieldEnum)[keyof typeof ClienteScalarFieldEnum]
@@ -12913,7 +12982,8 @@ export namespace Prisma {
     VendedorId: 'VendedorId',
     VendedorNome: 'VendedorNome',
     VendedorCidade: 'VendedorCidade',
-    VendedorUF: 'VendedorUF'
+    VendedorUF: 'VendedorUF',
+    VendedorDtImportacao: 'VendedorDtImportacao'
   };
 
   export type VendedorScalarFieldEnum = (typeof VendedorScalarFieldEnum)[keyof typeof VendedorScalarFieldEnum]
@@ -12921,7 +12991,8 @@ export namespace Prisma {
 
   export const CategoriaScalarFieldEnum: {
     CategoriaId: 'CategoriaId',
-    CategoriaNome: 'CategoriaNome'
+    CategoriaNome: 'CategoriaNome',
+    CategoriaDtImportacao: 'CategoriaDtImportacao'
   };
 
   export type CategoriaScalarFieldEnum = (typeof CategoriaScalarFieldEnum)[keyof typeof CategoriaScalarFieldEnum]
@@ -12929,8 +13000,9 @@ export namespace Prisma {
 
   export const SubCategoriaScalarFieldEnum: {
     SubCategoriaId: 'SubCategoriaId',
+    CategoriaId: 'CategoriaId',
     SubCategoriaNome: 'SubCategoriaNome',
-    CategoriaId: 'CategoriaId'
+    SubCategoriaDtImportacao: 'SubCategoriaDtImportacao'
   };
 
   export type SubCategoriaScalarFieldEnum = (typeof SubCategoriaScalarFieldEnum)[keyof typeof SubCategoriaScalarFieldEnum]
@@ -12939,7 +13011,7 @@ export namespace Prisma {
   export const ProdutoScalarFieldEnum: {
     ProdutoId: 'ProdutoId',
     ProdutoNome: 'ProdutoNome',
-    SubCategoriaId: 'SubCategoriaId'
+    ProdutoDtImportacao: 'ProdutoDtImportacao'
   };
 
   export type ProdutoScalarFieldEnum = (typeof ProdutoScalarFieldEnum)[keyof typeof ProdutoScalarFieldEnum]
@@ -12965,7 +13037,9 @@ export namespace Prisma {
     ProdutoId: 'ProdutoId',
     ItemPedidoQuantidade: 'ItemPedidoQuantidade',
     ItemPedidoPrecoUnitario: 'ItemPedidoPrecoUnitario',
-    ItemPedidoValorTotal: 'ItemPedidoValorTotal'
+    ItemPedidoValorTotal: 'ItemPedidoValorTotal',
+    SubCategoriaId: 'SubCategoriaId',
+    CategoriaId: 'CategoriaId'
   };
 
   export type ItemPedidoScalarFieldEnum = (typeof ItemPedidoScalarFieldEnum)[keyof typeof ItemPedidoScalarFieldEnum]
@@ -13107,6 +13181,7 @@ export namespace Prisma {
     ClienteNome?: StringFilter<"Cliente"> | string
     ClienteEmail?: StringFilter<"Cliente"> | string
     ClienteDocumento?: StringFilter<"Cliente"> | string
+    ClienteDtImportacao?: DateTimeFilter<"Cliente"> | Date | string
     Pedido?: PedidoListRelationFilter
   }
 
@@ -13115,6 +13190,7 @@ export namespace Prisma {
     ClienteNome?: SortOrder
     ClienteEmail?: SortOrder
     ClienteDocumento?: SortOrder
+    ClienteDtImportacao?: SortOrder
     Pedido?: PedidoOrderByRelationAggregateInput
   }
 
@@ -13126,6 +13202,7 @@ export namespace Prisma {
     ClienteNome?: StringFilter<"Cliente"> | string
     ClienteEmail?: StringFilter<"Cliente"> | string
     ClienteDocumento?: StringFilter<"Cliente"> | string
+    ClienteDtImportacao?: DateTimeFilter<"Cliente"> | Date | string
     Pedido?: PedidoListRelationFilter
   }, "ClienteId">
 
@@ -13134,6 +13211,7 @@ export namespace Prisma {
     ClienteNome?: SortOrder
     ClienteEmail?: SortOrder
     ClienteDocumento?: SortOrder
+    ClienteDtImportacao?: SortOrder
     _count?: ClienteCountOrderByAggregateInput
     _avg?: ClienteAvgOrderByAggregateInput
     _max?: ClienteMaxOrderByAggregateInput
@@ -13149,6 +13227,7 @@ export namespace Prisma {
     ClienteNome?: StringWithAggregatesFilter<"Cliente"> | string
     ClienteEmail?: StringWithAggregatesFilter<"Cliente"> | string
     ClienteDocumento?: StringWithAggregatesFilter<"Cliente"> | string
+    ClienteDtImportacao?: DateTimeWithAggregatesFilter<"Cliente"> | Date | string
   }
 
   export type VendedorWhereInput = {
@@ -13159,6 +13238,7 @@ export namespace Prisma {
     VendedorNome?: StringFilter<"Vendedor"> | string
     VendedorCidade?: StringFilter<"Vendedor"> | string
     VendedorUF?: StringFilter<"Vendedor"> | string
+    VendedorDtImportacao?: DateTimeFilter<"Vendedor"> | Date | string
     Pedido?: PedidoListRelationFilter
   }
 
@@ -13167,6 +13247,7 @@ export namespace Prisma {
     VendedorNome?: SortOrder
     VendedorCidade?: SortOrder
     VendedorUF?: SortOrder
+    VendedorDtImportacao?: SortOrder
     Pedido?: PedidoOrderByRelationAggregateInput
   }
 
@@ -13178,6 +13259,7 @@ export namespace Prisma {
     VendedorNome?: StringFilter<"Vendedor"> | string
     VendedorCidade?: StringFilter<"Vendedor"> | string
     VendedorUF?: StringFilter<"Vendedor"> | string
+    VendedorDtImportacao?: DateTimeFilter<"Vendedor"> | Date | string
     Pedido?: PedidoListRelationFilter
   }, "VendedorId">
 
@@ -13186,6 +13268,7 @@ export namespace Prisma {
     VendedorNome?: SortOrder
     VendedorCidade?: SortOrder
     VendedorUF?: SortOrder
+    VendedorDtImportacao?: SortOrder
     _count?: VendedorCountOrderByAggregateInput
     _avg?: VendedorAvgOrderByAggregateInput
     _max?: VendedorMaxOrderByAggregateInput
@@ -13201,6 +13284,7 @@ export namespace Prisma {
     VendedorNome?: StringWithAggregatesFilter<"Vendedor"> | string
     VendedorCidade?: StringWithAggregatesFilter<"Vendedor"> | string
     VendedorUF?: StringWithAggregatesFilter<"Vendedor"> | string
+    VendedorDtImportacao?: DateTimeWithAggregatesFilter<"Vendedor"> | Date | string
   }
 
   export type CategoriaWhereInput = {
@@ -13209,12 +13293,14 @@ export namespace Prisma {
     NOT?: CategoriaWhereInput | CategoriaWhereInput[]
     CategoriaId?: StringFilter<"Categoria"> | string
     CategoriaNome?: StringFilter<"Categoria"> | string
+    CategoriaDtImportacao?: DateTimeFilter<"Categoria"> | Date | string
     SubCategoria?: SubCategoriaListRelationFilter
   }
 
   export type CategoriaOrderByWithRelationInput = {
     CategoriaId?: SortOrder
     CategoriaNome?: SortOrder
+    CategoriaDtImportacao?: SortOrder
     SubCategoria?: SubCategoriaOrderByRelationAggregateInput
   }
 
@@ -13224,12 +13310,14 @@ export namespace Prisma {
     OR?: CategoriaWhereInput[]
     NOT?: CategoriaWhereInput | CategoriaWhereInput[]
     CategoriaNome?: StringFilter<"Categoria"> | string
+    CategoriaDtImportacao?: DateTimeFilter<"Categoria"> | Date | string
     SubCategoria?: SubCategoriaListRelationFilter
   }, "CategoriaId">
 
   export type CategoriaOrderByWithAggregationInput = {
     CategoriaId?: SortOrder
     CategoriaNome?: SortOrder
+    CategoriaDtImportacao?: SortOrder
     _count?: CategoriaCountOrderByAggregateInput
     _max?: CategoriaMaxOrderByAggregateInput
     _min?: CategoriaMinOrderByAggregateInput
@@ -13241,6 +13329,7 @@ export namespace Prisma {
     NOT?: CategoriaScalarWhereWithAggregatesInput | CategoriaScalarWhereWithAggregatesInput[]
     CategoriaId?: StringWithAggregatesFilter<"Categoria"> | string
     CategoriaNome?: StringWithAggregatesFilter<"Categoria"> | string
+    CategoriaDtImportacao?: DateTimeWithAggregatesFilter<"Categoria"> | Date | string
   }
 
   export type SubCategoriaWhereInput = {
@@ -13248,35 +13337,40 @@ export namespace Prisma {
     OR?: SubCategoriaWhereInput[]
     NOT?: SubCategoriaWhereInput | SubCategoriaWhereInput[]
     SubCategoriaId?: StringFilter<"SubCategoria"> | string
-    SubCategoriaNome?: StringFilter<"SubCategoria"> | string
     CategoriaId?: StringFilter<"SubCategoria"> | string
+    SubCategoriaNome?: StringFilter<"SubCategoria"> | string
+    SubCategoriaDtImportacao?: DateTimeFilter<"SubCategoria"> | Date | string
     Categoria?: XOR<CategoriaScalarRelationFilter, CategoriaWhereInput>
-    Produto?: ProdutoListRelationFilter
+    ItemPedido?: ItemPedidoListRelationFilter
   }
 
   export type SubCategoriaOrderByWithRelationInput = {
     SubCategoriaId?: SortOrder
-    SubCategoriaNome?: SortOrder
     CategoriaId?: SortOrder
+    SubCategoriaNome?: SortOrder
+    SubCategoriaDtImportacao?: SortOrder
     Categoria?: CategoriaOrderByWithRelationInput
-    Produto?: ProdutoOrderByRelationAggregateInput
+    ItemPedido?: ItemPedidoOrderByRelationAggregateInput
   }
 
   export type SubCategoriaWhereUniqueInput = Prisma.AtLeast<{
-    SubCategoriaId?: string
+    SubCategoriaId_CategoriaId?: SubCategoriaSubCategoriaIdCategoriaIdCompoundUniqueInput
     AND?: SubCategoriaWhereInput | SubCategoriaWhereInput[]
     OR?: SubCategoriaWhereInput[]
     NOT?: SubCategoriaWhereInput | SubCategoriaWhereInput[]
-    SubCategoriaNome?: StringFilter<"SubCategoria"> | string
+    SubCategoriaId?: StringFilter<"SubCategoria"> | string
     CategoriaId?: StringFilter<"SubCategoria"> | string
+    SubCategoriaNome?: StringFilter<"SubCategoria"> | string
+    SubCategoriaDtImportacao?: DateTimeFilter<"SubCategoria"> | Date | string
     Categoria?: XOR<CategoriaScalarRelationFilter, CategoriaWhereInput>
-    Produto?: ProdutoListRelationFilter
-  }, "SubCategoriaId">
+    ItemPedido?: ItemPedidoListRelationFilter
+  }, "SubCategoriaId_CategoriaId">
 
   export type SubCategoriaOrderByWithAggregationInput = {
     SubCategoriaId?: SortOrder
-    SubCategoriaNome?: SortOrder
     CategoriaId?: SortOrder
+    SubCategoriaNome?: SortOrder
+    SubCategoriaDtImportacao?: SortOrder
     _count?: SubCategoriaCountOrderByAggregateInput
     _max?: SubCategoriaMaxOrderByAggregateInput
     _min?: SubCategoriaMinOrderByAggregateInput
@@ -13287,8 +13381,9 @@ export namespace Prisma {
     OR?: SubCategoriaScalarWhereWithAggregatesInput[]
     NOT?: SubCategoriaScalarWhereWithAggregatesInput | SubCategoriaScalarWhereWithAggregatesInput[]
     SubCategoriaId?: StringWithAggregatesFilter<"SubCategoria"> | string
-    SubCategoriaNome?: StringWithAggregatesFilter<"SubCategoria"> | string
     CategoriaId?: StringWithAggregatesFilter<"SubCategoria"> | string
+    SubCategoriaNome?: StringWithAggregatesFilter<"SubCategoria"> | string
+    SubCategoriaDtImportacao?: DateTimeWithAggregatesFilter<"SubCategoria"> | Date | string
   }
 
   export type ProdutoWhereInput = {
@@ -13297,16 +13392,14 @@ export namespace Prisma {
     NOT?: ProdutoWhereInput | ProdutoWhereInput[]
     ProdutoId?: StringFilter<"Produto"> | string
     ProdutoNome?: StringFilter<"Produto"> | string
-    SubCategoriaId?: StringFilter<"Produto"> | string
-    SubCategoria?: XOR<SubCategoriaScalarRelationFilter, SubCategoriaWhereInput>
+    ProdutoDtImportacao?: DateTimeFilter<"Produto"> | Date | string
     ItemPedido?: ItemPedidoListRelationFilter
   }
 
   export type ProdutoOrderByWithRelationInput = {
     ProdutoId?: SortOrder
     ProdutoNome?: SortOrder
-    SubCategoriaId?: SortOrder
-    SubCategoria?: SubCategoriaOrderByWithRelationInput
+    ProdutoDtImportacao?: SortOrder
     ItemPedido?: ItemPedidoOrderByRelationAggregateInput
   }
 
@@ -13316,15 +13409,14 @@ export namespace Prisma {
     OR?: ProdutoWhereInput[]
     NOT?: ProdutoWhereInput | ProdutoWhereInput[]
     ProdutoNome?: StringFilter<"Produto"> | string
-    SubCategoriaId?: StringFilter<"Produto"> | string
-    SubCategoria?: XOR<SubCategoriaScalarRelationFilter, SubCategoriaWhereInput>
+    ProdutoDtImportacao?: DateTimeFilter<"Produto"> | Date | string
     ItemPedido?: ItemPedidoListRelationFilter
   }, "ProdutoId">
 
   export type ProdutoOrderByWithAggregationInput = {
     ProdutoId?: SortOrder
     ProdutoNome?: SortOrder
-    SubCategoriaId?: SortOrder
+    ProdutoDtImportacao?: SortOrder
     _count?: ProdutoCountOrderByAggregateInput
     _max?: ProdutoMaxOrderByAggregateInput
     _min?: ProdutoMinOrderByAggregateInput
@@ -13336,7 +13428,7 @@ export namespace Prisma {
     NOT?: ProdutoScalarWhereWithAggregatesInput | ProdutoScalarWhereWithAggregatesInput[]
     ProdutoId?: StringWithAggregatesFilter<"Produto"> | string
     ProdutoNome?: StringWithAggregatesFilter<"Produto"> | string
-    SubCategoriaId?: StringWithAggregatesFilter<"Produto"> | string
+    ProdutoDtImportacao?: DateTimeWithAggregatesFilter<"Produto"> | Date | string
   }
 
   export type PedidoWhereInput = {
@@ -13436,8 +13528,11 @@ export namespace Prisma {
     ItemPedidoQuantidade?: IntFilter<"ItemPedido"> | number
     ItemPedidoPrecoUnitario?: DecimalFilter<"ItemPedido"> | Decimal | DecimalJsLike | number | string
     ItemPedidoValorTotal?: DecimalFilter<"ItemPedido"> | Decimal | DecimalJsLike | number | string
+    SubCategoriaId?: StringFilter<"ItemPedido"> | string
+    CategoriaId?: StringFilter<"ItemPedido"> | string
     Pedido?: XOR<PedidoScalarRelationFilter, PedidoWhereInput>
     Produto?: XOR<ProdutoScalarRelationFilter, ProdutoWhereInput>
+    SubCategoria?: XOR<SubCategoriaScalarRelationFilter, SubCategoriaWhereInput>
   }
 
   export type ItemPedidoOrderByWithRelationInput = {
@@ -13447,8 +13542,11 @@ export namespace Prisma {
     ItemPedidoQuantidade?: SortOrder
     ItemPedidoPrecoUnitario?: SortOrder
     ItemPedidoValorTotal?: SortOrder
+    SubCategoriaId?: SortOrder
+    CategoriaId?: SortOrder
     Pedido?: PedidoOrderByWithRelationInput
     Produto?: ProdutoOrderByWithRelationInput
+    SubCategoria?: SubCategoriaOrderByWithRelationInput
   }
 
   export type ItemPedidoWhereUniqueInput = Prisma.AtLeast<{
@@ -13462,8 +13560,11 @@ export namespace Prisma {
     ItemPedidoQuantidade?: IntFilter<"ItemPedido"> | number
     ItemPedidoPrecoUnitario?: DecimalFilter<"ItemPedido"> | Decimal | DecimalJsLike | number | string
     ItemPedidoValorTotal?: DecimalFilter<"ItemPedido"> | Decimal | DecimalJsLike | number | string
+    SubCategoriaId?: StringFilter<"ItemPedido"> | string
+    CategoriaId?: StringFilter<"ItemPedido"> | string
     Pedido?: XOR<PedidoScalarRelationFilter, PedidoWhereInput>
     Produto?: XOR<ProdutoScalarRelationFilter, ProdutoWhereInput>
+    SubCategoria?: XOR<SubCategoriaScalarRelationFilter, SubCategoriaWhereInput>
   }, "ItemPedidoId_PedidoId">
 
   export type ItemPedidoOrderByWithAggregationInput = {
@@ -13473,6 +13574,8 @@ export namespace Prisma {
     ItemPedidoQuantidade?: SortOrder
     ItemPedidoPrecoUnitario?: SortOrder
     ItemPedidoValorTotal?: SortOrder
+    SubCategoriaId?: SortOrder
+    CategoriaId?: SortOrder
     _count?: ItemPedidoCountOrderByAggregateInput
     _avg?: ItemPedidoAvgOrderByAggregateInput
     _max?: ItemPedidoMaxOrderByAggregateInput
@@ -13490,6 +13593,8 @@ export namespace Prisma {
     ItemPedidoQuantidade?: IntWithAggregatesFilter<"ItemPedido"> | number
     ItemPedidoPrecoUnitario?: DecimalWithAggregatesFilter<"ItemPedido"> | Decimal | DecimalJsLike | number | string
     ItemPedidoValorTotal?: DecimalWithAggregatesFilter<"ItemPedido"> | Decimal | DecimalJsLike | number | string
+    SubCategoriaId?: StringWithAggregatesFilter<"ItemPedido"> | string
+    CategoriaId?: StringWithAggregatesFilter<"ItemPedido"> | string
   }
 
   export type MetadadosPedidoWhereInput = {
@@ -13667,6 +13772,7 @@ export namespace Prisma {
     ClienteNome: string
     ClienteEmail: string
     ClienteDocumento: string
+    ClienteDtImportacao?: Date | string
     Pedido?: PedidoCreateNestedManyWithoutClienteInput
   }
 
@@ -13675,6 +13781,7 @@ export namespace Prisma {
     ClienteNome: string
     ClienteEmail: string
     ClienteDocumento: string
+    ClienteDtImportacao?: Date | string
     Pedido?: PedidoUncheckedCreateNestedManyWithoutClienteInput
   }
 
@@ -13683,6 +13790,7 @@ export namespace Prisma {
     ClienteNome?: StringFieldUpdateOperationsInput | string
     ClienteEmail?: StringFieldUpdateOperationsInput | string
     ClienteDocumento?: StringFieldUpdateOperationsInput | string
+    ClienteDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
     Pedido?: PedidoUpdateManyWithoutClienteNestedInput
   }
 
@@ -13691,6 +13799,7 @@ export namespace Prisma {
     ClienteNome?: StringFieldUpdateOperationsInput | string
     ClienteEmail?: StringFieldUpdateOperationsInput | string
     ClienteDocumento?: StringFieldUpdateOperationsInput | string
+    ClienteDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
     Pedido?: PedidoUncheckedUpdateManyWithoutClienteNestedInput
   }
 
@@ -13699,6 +13808,7 @@ export namespace Prisma {
     ClienteNome: string
     ClienteEmail: string
     ClienteDocumento: string
+    ClienteDtImportacao?: Date | string
   }
 
   export type ClienteUpdateManyMutationInput = {
@@ -13706,6 +13816,7 @@ export namespace Prisma {
     ClienteNome?: StringFieldUpdateOperationsInput | string
     ClienteEmail?: StringFieldUpdateOperationsInput | string
     ClienteDocumento?: StringFieldUpdateOperationsInput | string
+    ClienteDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ClienteUncheckedUpdateManyInput = {
@@ -13713,6 +13824,7 @@ export namespace Prisma {
     ClienteNome?: StringFieldUpdateOperationsInput | string
     ClienteEmail?: StringFieldUpdateOperationsInput | string
     ClienteDocumento?: StringFieldUpdateOperationsInput | string
+    ClienteDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type VendedorCreateInput = {
@@ -13720,6 +13832,7 @@ export namespace Prisma {
     VendedorNome: string
     VendedorCidade: string
     VendedorUF: string
+    VendedorDtImportacao?: Date | string
     Pedido?: PedidoCreateNestedManyWithoutVendedorInput
   }
 
@@ -13728,6 +13841,7 @@ export namespace Prisma {
     VendedorNome: string
     VendedorCidade: string
     VendedorUF: string
+    VendedorDtImportacao?: Date | string
     Pedido?: PedidoUncheckedCreateNestedManyWithoutVendedorInput
   }
 
@@ -13736,6 +13850,7 @@ export namespace Prisma {
     VendedorNome?: StringFieldUpdateOperationsInput | string
     VendedorCidade?: StringFieldUpdateOperationsInput | string
     VendedorUF?: StringFieldUpdateOperationsInput | string
+    VendedorDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
     Pedido?: PedidoUpdateManyWithoutVendedorNestedInput
   }
 
@@ -13744,6 +13859,7 @@ export namespace Prisma {
     VendedorNome?: StringFieldUpdateOperationsInput | string
     VendedorCidade?: StringFieldUpdateOperationsInput | string
     VendedorUF?: StringFieldUpdateOperationsInput | string
+    VendedorDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
     Pedido?: PedidoUncheckedUpdateManyWithoutVendedorNestedInput
   }
 
@@ -13752,6 +13868,7 @@ export namespace Prisma {
     VendedorNome: string
     VendedorCidade: string
     VendedorUF: string
+    VendedorDtImportacao?: Date | string
   }
 
   export type VendedorUpdateManyMutationInput = {
@@ -13759,6 +13876,7 @@ export namespace Prisma {
     VendedorNome?: StringFieldUpdateOperationsInput | string
     VendedorCidade?: StringFieldUpdateOperationsInput | string
     VendedorUF?: StringFieldUpdateOperationsInput | string
+    VendedorDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type VendedorUncheckedUpdateManyInput = {
@@ -13766,135 +13884,151 @@ export namespace Prisma {
     VendedorNome?: StringFieldUpdateOperationsInput | string
     VendedorCidade?: StringFieldUpdateOperationsInput | string
     VendedorUF?: StringFieldUpdateOperationsInput | string
+    VendedorDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CategoriaCreateInput = {
     CategoriaId: string
     CategoriaNome: string
+    CategoriaDtImportacao?: Date | string
     SubCategoria?: SubCategoriaCreateNestedManyWithoutCategoriaInput
   }
 
   export type CategoriaUncheckedCreateInput = {
     CategoriaId: string
     CategoriaNome: string
+    CategoriaDtImportacao?: Date | string
     SubCategoria?: SubCategoriaUncheckedCreateNestedManyWithoutCategoriaInput
   }
 
   export type CategoriaUpdateInput = {
     CategoriaId?: StringFieldUpdateOperationsInput | string
     CategoriaNome?: StringFieldUpdateOperationsInput | string
+    CategoriaDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
     SubCategoria?: SubCategoriaUpdateManyWithoutCategoriaNestedInput
   }
 
   export type CategoriaUncheckedUpdateInput = {
     CategoriaId?: StringFieldUpdateOperationsInput | string
     CategoriaNome?: StringFieldUpdateOperationsInput | string
+    CategoriaDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
     SubCategoria?: SubCategoriaUncheckedUpdateManyWithoutCategoriaNestedInput
   }
 
   export type CategoriaCreateManyInput = {
     CategoriaId: string
     CategoriaNome: string
+    CategoriaDtImportacao?: Date | string
   }
 
   export type CategoriaUpdateManyMutationInput = {
     CategoriaId?: StringFieldUpdateOperationsInput | string
     CategoriaNome?: StringFieldUpdateOperationsInput | string
+    CategoriaDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CategoriaUncheckedUpdateManyInput = {
     CategoriaId?: StringFieldUpdateOperationsInput | string
     CategoriaNome?: StringFieldUpdateOperationsInput | string
+    CategoriaDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SubCategoriaCreateInput = {
     SubCategoriaId: string
     SubCategoriaNome: string
+    SubCategoriaDtImportacao?: Date | string
     Categoria: CategoriaCreateNestedOneWithoutSubCategoriaInput
-    Produto?: ProdutoCreateNestedManyWithoutSubCategoriaInput
+    ItemPedido?: ItemPedidoCreateNestedManyWithoutSubCategoriaInput
   }
 
   export type SubCategoriaUncheckedCreateInput = {
     SubCategoriaId: string
-    SubCategoriaNome: string
     CategoriaId: string
-    Produto?: ProdutoUncheckedCreateNestedManyWithoutSubCategoriaInput
+    SubCategoriaNome: string
+    SubCategoriaDtImportacao?: Date | string
+    ItemPedido?: ItemPedidoUncheckedCreateNestedManyWithoutSubCategoriaInput
   }
 
   export type SubCategoriaUpdateInput = {
     SubCategoriaId?: StringFieldUpdateOperationsInput | string
     SubCategoriaNome?: StringFieldUpdateOperationsInput | string
+    SubCategoriaDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
     Categoria?: CategoriaUpdateOneRequiredWithoutSubCategoriaNestedInput
-    Produto?: ProdutoUpdateManyWithoutSubCategoriaNestedInput
+    ItemPedido?: ItemPedidoUpdateManyWithoutSubCategoriaNestedInput
   }
 
   export type SubCategoriaUncheckedUpdateInput = {
     SubCategoriaId?: StringFieldUpdateOperationsInput | string
-    SubCategoriaNome?: StringFieldUpdateOperationsInput | string
     CategoriaId?: StringFieldUpdateOperationsInput | string
-    Produto?: ProdutoUncheckedUpdateManyWithoutSubCategoriaNestedInput
+    SubCategoriaNome?: StringFieldUpdateOperationsInput | string
+    SubCategoriaDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    ItemPedido?: ItemPedidoUncheckedUpdateManyWithoutSubCategoriaNestedInput
   }
 
   export type SubCategoriaCreateManyInput = {
     SubCategoriaId: string
-    SubCategoriaNome: string
     CategoriaId: string
+    SubCategoriaNome: string
+    SubCategoriaDtImportacao?: Date | string
   }
 
   export type SubCategoriaUpdateManyMutationInput = {
     SubCategoriaId?: StringFieldUpdateOperationsInput | string
     SubCategoriaNome?: StringFieldUpdateOperationsInput | string
+    SubCategoriaDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SubCategoriaUncheckedUpdateManyInput = {
     SubCategoriaId?: StringFieldUpdateOperationsInput | string
-    SubCategoriaNome?: StringFieldUpdateOperationsInput | string
     CategoriaId?: StringFieldUpdateOperationsInput | string
+    SubCategoriaNome?: StringFieldUpdateOperationsInput | string
+    SubCategoriaDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProdutoCreateInput = {
     ProdutoId: string
     ProdutoNome: string
-    SubCategoria: SubCategoriaCreateNestedOneWithoutProdutoInput
+    ProdutoDtImportacao?: Date | string
     ItemPedido?: ItemPedidoCreateNestedManyWithoutProdutoInput
   }
 
   export type ProdutoUncheckedCreateInput = {
     ProdutoId: string
     ProdutoNome: string
-    SubCategoriaId: string
+    ProdutoDtImportacao?: Date | string
     ItemPedido?: ItemPedidoUncheckedCreateNestedManyWithoutProdutoInput
   }
 
   export type ProdutoUpdateInput = {
     ProdutoId?: StringFieldUpdateOperationsInput | string
     ProdutoNome?: StringFieldUpdateOperationsInput | string
-    SubCategoria?: SubCategoriaUpdateOneRequiredWithoutProdutoNestedInput
+    ProdutoDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
     ItemPedido?: ItemPedidoUpdateManyWithoutProdutoNestedInput
   }
 
   export type ProdutoUncheckedUpdateInput = {
     ProdutoId?: StringFieldUpdateOperationsInput | string
     ProdutoNome?: StringFieldUpdateOperationsInput | string
-    SubCategoriaId?: StringFieldUpdateOperationsInput | string
+    ProdutoDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
     ItemPedido?: ItemPedidoUncheckedUpdateManyWithoutProdutoNestedInput
   }
 
   export type ProdutoCreateManyInput = {
     ProdutoId: string
     ProdutoNome: string
-    SubCategoriaId: string
+    ProdutoDtImportacao?: Date | string
   }
 
   export type ProdutoUpdateManyMutationInput = {
     ProdutoId?: StringFieldUpdateOperationsInput | string
     ProdutoNome?: StringFieldUpdateOperationsInput | string
+    ProdutoDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProdutoUncheckedUpdateManyInput = {
     ProdutoId?: StringFieldUpdateOperationsInput | string
     ProdutoNome?: StringFieldUpdateOperationsInput | string
-    SubCategoriaId?: StringFieldUpdateOperationsInput | string
+    ProdutoDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PedidoCreateInput = {
@@ -13995,6 +14129,7 @@ export namespace Prisma {
     ItemPedidoValorTotal: Decimal | DecimalJsLike | number | string
     Pedido: PedidoCreateNestedOneWithoutItemPedidoInput
     Produto: ProdutoCreateNestedOneWithoutItemPedidoInput
+    SubCategoria: SubCategoriaCreateNestedOneWithoutItemPedidoInput
   }
 
   export type ItemPedidoUncheckedCreateInput = {
@@ -14004,6 +14139,8 @@ export namespace Prisma {
     ItemPedidoQuantidade: number
     ItemPedidoPrecoUnitario: Decimal | DecimalJsLike | number | string
     ItemPedidoValorTotal: Decimal | DecimalJsLike | number | string
+    SubCategoriaId: string
+    CategoriaId: string
   }
 
   export type ItemPedidoUpdateInput = {
@@ -14013,6 +14150,7 @@ export namespace Prisma {
     ItemPedidoValorTotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     Pedido?: PedidoUpdateOneRequiredWithoutItemPedidoNestedInput
     Produto?: ProdutoUpdateOneRequiredWithoutItemPedidoNestedInput
+    SubCategoria?: SubCategoriaUpdateOneRequiredWithoutItemPedidoNestedInput
   }
 
   export type ItemPedidoUncheckedUpdateInput = {
@@ -14022,6 +14160,8 @@ export namespace Prisma {
     ItemPedidoQuantidade?: IntFieldUpdateOperationsInput | number
     ItemPedidoPrecoUnitario?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     ItemPedidoValorTotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    SubCategoriaId?: StringFieldUpdateOperationsInput | string
+    CategoriaId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ItemPedidoCreateManyInput = {
@@ -14031,6 +14171,8 @@ export namespace Prisma {
     ItemPedidoQuantidade: number
     ItemPedidoPrecoUnitario: Decimal | DecimalJsLike | number | string
     ItemPedidoValorTotal: Decimal | DecimalJsLike | number | string
+    SubCategoriaId: string
+    CategoriaId: string
   }
 
   export type ItemPedidoUpdateManyMutationInput = {
@@ -14047,6 +14189,8 @@ export namespace Prisma {
     ItemPedidoQuantidade?: IntFieldUpdateOperationsInput | number
     ItemPedidoPrecoUnitario?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     ItemPedidoValorTotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    SubCategoriaId?: StringFieldUpdateOperationsInput | string
+    CategoriaId?: StringFieldUpdateOperationsInput | string
   }
 
   export type MetadadosPedidoCreateInput = {
@@ -14247,6 +14391,17 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type PedidoListRelationFilter = {
     every?: PedidoWhereInput
     some?: PedidoWhereInput
@@ -14262,6 +14417,7 @@ export namespace Prisma {
     ClienteNome?: SortOrder
     ClienteEmail?: SortOrder
     ClienteDocumento?: SortOrder
+    ClienteDtImportacao?: SortOrder
   }
 
   export type ClienteAvgOrderByAggregateInput = {
@@ -14273,6 +14429,7 @@ export namespace Prisma {
     ClienteNome?: SortOrder
     ClienteEmail?: SortOrder
     ClienteDocumento?: SortOrder
+    ClienteDtImportacao?: SortOrder
   }
 
   export type ClienteMinOrderByAggregateInput = {
@@ -14280,6 +14437,7 @@ export namespace Prisma {
     ClienteNome?: SortOrder
     ClienteEmail?: SortOrder
     ClienteDocumento?: SortOrder
+    ClienteDtImportacao?: SortOrder
   }
 
   export type ClienteSumOrderByAggregateInput = {
@@ -14320,11 +14478,26 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type VendedorCountOrderByAggregateInput = {
     VendedorId?: SortOrder
     VendedorNome?: SortOrder
     VendedorCidade?: SortOrder
     VendedorUF?: SortOrder
+    VendedorDtImportacao?: SortOrder
   }
 
   export type VendedorAvgOrderByAggregateInput = {
@@ -14336,6 +14509,7 @@ export namespace Prisma {
     VendedorNome?: SortOrder
     VendedorCidade?: SortOrder
     VendedorUF?: SortOrder
+    VendedorDtImportacao?: SortOrder
   }
 
   export type VendedorMinOrderByAggregateInput = {
@@ -14343,6 +14517,7 @@ export namespace Prisma {
     VendedorNome?: SortOrder
     VendedorCidade?: SortOrder
     VendedorUF?: SortOrder
+    VendedorDtImportacao?: SortOrder
   }
 
   export type VendedorSumOrderByAggregateInput = {
@@ -14362,54 +14537,24 @@ export namespace Prisma {
   export type CategoriaCountOrderByAggregateInput = {
     CategoriaId?: SortOrder
     CategoriaNome?: SortOrder
+    CategoriaDtImportacao?: SortOrder
   }
 
   export type CategoriaMaxOrderByAggregateInput = {
     CategoriaId?: SortOrder
     CategoriaNome?: SortOrder
+    CategoriaDtImportacao?: SortOrder
   }
 
   export type CategoriaMinOrderByAggregateInput = {
     CategoriaId?: SortOrder
     CategoriaNome?: SortOrder
+    CategoriaDtImportacao?: SortOrder
   }
 
   export type CategoriaScalarRelationFilter = {
     is?: CategoriaWhereInput
     isNot?: CategoriaWhereInput
-  }
-
-  export type ProdutoListRelationFilter = {
-    every?: ProdutoWhereInput
-    some?: ProdutoWhereInput
-    none?: ProdutoWhereInput
-  }
-
-  export type ProdutoOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type SubCategoriaCountOrderByAggregateInput = {
-    SubCategoriaId?: SortOrder
-    SubCategoriaNome?: SortOrder
-    CategoriaId?: SortOrder
-  }
-
-  export type SubCategoriaMaxOrderByAggregateInput = {
-    SubCategoriaId?: SortOrder
-    SubCategoriaNome?: SortOrder
-    CategoriaId?: SortOrder
-  }
-
-  export type SubCategoriaMinOrderByAggregateInput = {
-    SubCategoriaId?: SortOrder
-    SubCategoriaNome?: SortOrder
-    CategoriaId?: SortOrder
-  }
-
-  export type SubCategoriaScalarRelationFilter = {
-    is?: SubCategoriaWhereInput
-    isNot?: SubCategoriaWhereInput
   }
 
   export type ItemPedidoListRelationFilter = {
@@ -14422,33 +14567,48 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type SubCategoriaSubCategoriaIdCategoriaIdCompoundUniqueInput = {
+    SubCategoriaId: string
+    CategoriaId: string
+  }
+
+  export type SubCategoriaCountOrderByAggregateInput = {
+    SubCategoriaId?: SortOrder
+    CategoriaId?: SortOrder
+    SubCategoriaNome?: SortOrder
+    SubCategoriaDtImportacao?: SortOrder
+  }
+
+  export type SubCategoriaMaxOrderByAggregateInput = {
+    SubCategoriaId?: SortOrder
+    CategoriaId?: SortOrder
+    SubCategoriaNome?: SortOrder
+    SubCategoriaDtImportacao?: SortOrder
+  }
+
+  export type SubCategoriaMinOrderByAggregateInput = {
+    SubCategoriaId?: SortOrder
+    CategoriaId?: SortOrder
+    SubCategoriaNome?: SortOrder
+    SubCategoriaDtImportacao?: SortOrder
+  }
+
   export type ProdutoCountOrderByAggregateInput = {
     ProdutoId?: SortOrder
     ProdutoNome?: SortOrder
-    SubCategoriaId?: SortOrder
+    ProdutoDtImportacao?: SortOrder
   }
 
   export type ProdutoMaxOrderByAggregateInput = {
     ProdutoId?: SortOrder
     ProdutoNome?: SortOrder
-    SubCategoriaId?: SortOrder
+    ProdutoDtImportacao?: SortOrder
   }
 
   export type ProdutoMinOrderByAggregateInput = {
     ProdutoId?: SortOrder
     ProdutoNome?: SortOrder
-    SubCategoriaId?: SortOrder
-  }
-
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+    ProdutoDtImportacao?: SortOrder
   }
 
   export type DecimalFilter<$PrismaModel = never> = {
@@ -14547,20 +14707,6 @@ export namespace Prisma {
     VendedorId?: SortOrder
   }
 
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
   export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
@@ -14587,6 +14733,11 @@ export namespace Prisma {
     isNot?: ProdutoWhereInput
   }
 
+  export type SubCategoriaScalarRelationFilter = {
+    is?: SubCategoriaWhereInput
+    isNot?: SubCategoriaWhereInput
+  }
+
   export type ItemPedidoItemPedidoIdPedidoIdCompoundUniqueInput = {
     ItemPedidoId: number
     PedidoId: string
@@ -14599,6 +14750,8 @@ export namespace Prisma {
     ItemPedidoQuantidade?: SortOrder
     ItemPedidoPrecoUnitario?: SortOrder
     ItemPedidoValorTotal?: SortOrder
+    SubCategoriaId?: SortOrder
+    CategoriaId?: SortOrder
   }
 
   export type ItemPedidoAvgOrderByAggregateInput = {
@@ -14615,6 +14768,8 @@ export namespace Prisma {
     ItemPedidoQuantidade?: SortOrder
     ItemPedidoPrecoUnitario?: SortOrder
     ItemPedidoValorTotal?: SortOrder
+    SubCategoriaId?: SortOrder
+    CategoriaId?: SortOrder
   }
 
   export type ItemPedidoMinOrderByAggregateInput = {
@@ -14624,6 +14779,8 @@ export namespace Prisma {
     ItemPedidoQuantidade?: SortOrder
     ItemPedidoPrecoUnitario?: SortOrder
     ItemPedidoValorTotal?: SortOrder
+    SubCategoriaId?: SortOrder
+    CategoriaId?: SortOrder
   }
 
   export type ItemPedidoSumOrderByAggregateInput = {
@@ -14732,6 +14889,10 @@ export namespace Prisma {
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type PedidoUpdateManyWithoutClienteNestedInput = {
@@ -14852,18 +15013,18 @@ export namespace Prisma {
     connect?: CategoriaWhereUniqueInput
   }
 
-  export type ProdutoCreateNestedManyWithoutSubCategoriaInput = {
-    create?: XOR<ProdutoCreateWithoutSubCategoriaInput, ProdutoUncheckedCreateWithoutSubCategoriaInput> | ProdutoCreateWithoutSubCategoriaInput[] | ProdutoUncheckedCreateWithoutSubCategoriaInput[]
-    connectOrCreate?: ProdutoCreateOrConnectWithoutSubCategoriaInput | ProdutoCreateOrConnectWithoutSubCategoriaInput[]
-    createMany?: ProdutoCreateManySubCategoriaInputEnvelope
-    connect?: ProdutoWhereUniqueInput | ProdutoWhereUniqueInput[]
+  export type ItemPedidoCreateNestedManyWithoutSubCategoriaInput = {
+    create?: XOR<ItemPedidoCreateWithoutSubCategoriaInput, ItemPedidoUncheckedCreateWithoutSubCategoriaInput> | ItemPedidoCreateWithoutSubCategoriaInput[] | ItemPedidoUncheckedCreateWithoutSubCategoriaInput[]
+    connectOrCreate?: ItemPedidoCreateOrConnectWithoutSubCategoriaInput | ItemPedidoCreateOrConnectWithoutSubCategoriaInput[]
+    createMany?: ItemPedidoCreateManySubCategoriaInputEnvelope
+    connect?: ItemPedidoWhereUniqueInput | ItemPedidoWhereUniqueInput[]
   }
 
-  export type ProdutoUncheckedCreateNestedManyWithoutSubCategoriaInput = {
-    create?: XOR<ProdutoCreateWithoutSubCategoriaInput, ProdutoUncheckedCreateWithoutSubCategoriaInput> | ProdutoCreateWithoutSubCategoriaInput[] | ProdutoUncheckedCreateWithoutSubCategoriaInput[]
-    connectOrCreate?: ProdutoCreateOrConnectWithoutSubCategoriaInput | ProdutoCreateOrConnectWithoutSubCategoriaInput[]
-    createMany?: ProdutoCreateManySubCategoriaInputEnvelope
-    connect?: ProdutoWhereUniqueInput | ProdutoWhereUniqueInput[]
+  export type ItemPedidoUncheckedCreateNestedManyWithoutSubCategoriaInput = {
+    create?: XOR<ItemPedidoCreateWithoutSubCategoriaInput, ItemPedidoUncheckedCreateWithoutSubCategoriaInput> | ItemPedidoCreateWithoutSubCategoriaInput[] | ItemPedidoUncheckedCreateWithoutSubCategoriaInput[]
+    connectOrCreate?: ItemPedidoCreateOrConnectWithoutSubCategoriaInput | ItemPedidoCreateOrConnectWithoutSubCategoriaInput[]
+    createMany?: ItemPedidoCreateManySubCategoriaInputEnvelope
+    connect?: ItemPedidoWhereUniqueInput | ItemPedidoWhereUniqueInput[]
   }
 
   export type CategoriaUpdateOneRequiredWithoutSubCategoriaNestedInput = {
@@ -14874,38 +15035,32 @@ export namespace Prisma {
     update?: XOR<XOR<CategoriaUpdateToOneWithWhereWithoutSubCategoriaInput, CategoriaUpdateWithoutSubCategoriaInput>, CategoriaUncheckedUpdateWithoutSubCategoriaInput>
   }
 
-  export type ProdutoUpdateManyWithoutSubCategoriaNestedInput = {
-    create?: XOR<ProdutoCreateWithoutSubCategoriaInput, ProdutoUncheckedCreateWithoutSubCategoriaInput> | ProdutoCreateWithoutSubCategoriaInput[] | ProdutoUncheckedCreateWithoutSubCategoriaInput[]
-    connectOrCreate?: ProdutoCreateOrConnectWithoutSubCategoriaInput | ProdutoCreateOrConnectWithoutSubCategoriaInput[]
-    upsert?: ProdutoUpsertWithWhereUniqueWithoutSubCategoriaInput | ProdutoUpsertWithWhereUniqueWithoutSubCategoriaInput[]
-    createMany?: ProdutoCreateManySubCategoriaInputEnvelope
-    set?: ProdutoWhereUniqueInput | ProdutoWhereUniqueInput[]
-    disconnect?: ProdutoWhereUniqueInput | ProdutoWhereUniqueInput[]
-    delete?: ProdutoWhereUniqueInput | ProdutoWhereUniqueInput[]
-    connect?: ProdutoWhereUniqueInput | ProdutoWhereUniqueInput[]
-    update?: ProdutoUpdateWithWhereUniqueWithoutSubCategoriaInput | ProdutoUpdateWithWhereUniqueWithoutSubCategoriaInput[]
-    updateMany?: ProdutoUpdateManyWithWhereWithoutSubCategoriaInput | ProdutoUpdateManyWithWhereWithoutSubCategoriaInput[]
-    deleteMany?: ProdutoScalarWhereInput | ProdutoScalarWhereInput[]
+  export type ItemPedidoUpdateManyWithoutSubCategoriaNestedInput = {
+    create?: XOR<ItemPedidoCreateWithoutSubCategoriaInput, ItemPedidoUncheckedCreateWithoutSubCategoriaInput> | ItemPedidoCreateWithoutSubCategoriaInput[] | ItemPedidoUncheckedCreateWithoutSubCategoriaInput[]
+    connectOrCreate?: ItemPedidoCreateOrConnectWithoutSubCategoriaInput | ItemPedidoCreateOrConnectWithoutSubCategoriaInput[]
+    upsert?: ItemPedidoUpsertWithWhereUniqueWithoutSubCategoriaInput | ItemPedidoUpsertWithWhereUniqueWithoutSubCategoriaInput[]
+    createMany?: ItemPedidoCreateManySubCategoriaInputEnvelope
+    set?: ItemPedidoWhereUniqueInput | ItemPedidoWhereUniqueInput[]
+    disconnect?: ItemPedidoWhereUniqueInput | ItemPedidoWhereUniqueInput[]
+    delete?: ItemPedidoWhereUniqueInput | ItemPedidoWhereUniqueInput[]
+    connect?: ItemPedidoWhereUniqueInput | ItemPedidoWhereUniqueInput[]
+    update?: ItemPedidoUpdateWithWhereUniqueWithoutSubCategoriaInput | ItemPedidoUpdateWithWhereUniqueWithoutSubCategoriaInput[]
+    updateMany?: ItemPedidoUpdateManyWithWhereWithoutSubCategoriaInput | ItemPedidoUpdateManyWithWhereWithoutSubCategoriaInput[]
+    deleteMany?: ItemPedidoScalarWhereInput | ItemPedidoScalarWhereInput[]
   }
 
-  export type ProdutoUncheckedUpdateManyWithoutSubCategoriaNestedInput = {
-    create?: XOR<ProdutoCreateWithoutSubCategoriaInput, ProdutoUncheckedCreateWithoutSubCategoriaInput> | ProdutoCreateWithoutSubCategoriaInput[] | ProdutoUncheckedCreateWithoutSubCategoriaInput[]
-    connectOrCreate?: ProdutoCreateOrConnectWithoutSubCategoriaInput | ProdutoCreateOrConnectWithoutSubCategoriaInput[]
-    upsert?: ProdutoUpsertWithWhereUniqueWithoutSubCategoriaInput | ProdutoUpsertWithWhereUniqueWithoutSubCategoriaInput[]
-    createMany?: ProdutoCreateManySubCategoriaInputEnvelope
-    set?: ProdutoWhereUniqueInput | ProdutoWhereUniqueInput[]
-    disconnect?: ProdutoWhereUniqueInput | ProdutoWhereUniqueInput[]
-    delete?: ProdutoWhereUniqueInput | ProdutoWhereUniqueInput[]
-    connect?: ProdutoWhereUniqueInput | ProdutoWhereUniqueInput[]
-    update?: ProdutoUpdateWithWhereUniqueWithoutSubCategoriaInput | ProdutoUpdateWithWhereUniqueWithoutSubCategoriaInput[]
-    updateMany?: ProdutoUpdateManyWithWhereWithoutSubCategoriaInput | ProdutoUpdateManyWithWhereWithoutSubCategoriaInput[]
-    deleteMany?: ProdutoScalarWhereInput | ProdutoScalarWhereInput[]
-  }
-
-  export type SubCategoriaCreateNestedOneWithoutProdutoInput = {
-    create?: XOR<SubCategoriaCreateWithoutProdutoInput, SubCategoriaUncheckedCreateWithoutProdutoInput>
-    connectOrCreate?: SubCategoriaCreateOrConnectWithoutProdutoInput
-    connect?: SubCategoriaWhereUniqueInput
+  export type ItemPedidoUncheckedUpdateManyWithoutSubCategoriaNestedInput = {
+    create?: XOR<ItemPedidoCreateWithoutSubCategoriaInput, ItemPedidoUncheckedCreateWithoutSubCategoriaInput> | ItemPedidoCreateWithoutSubCategoriaInput[] | ItemPedidoUncheckedCreateWithoutSubCategoriaInput[]
+    connectOrCreate?: ItemPedidoCreateOrConnectWithoutSubCategoriaInput | ItemPedidoCreateOrConnectWithoutSubCategoriaInput[]
+    upsert?: ItemPedidoUpsertWithWhereUniqueWithoutSubCategoriaInput | ItemPedidoUpsertWithWhereUniqueWithoutSubCategoriaInput[]
+    createMany?: ItemPedidoCreateManySubCategoriaInputEnvelope
+    set?: ItemPedidoWhereUniqueInput | ItemPedidoWhereUniqueInput[]
+    disconnect?: ItemPedidoWhereUniqueInput | ItemPedidoWhereUniqueInput[]
+    delete?: ItemPedidoWhereUniqueInput | ItemPedidoWhereUniqueInput[]
+    connect?: ItemPedidoWhereUniqueInput | ItemPedidoWhereUniqueInput[]
+    update?: ItemPedidoUpdateWithWhereUniqueWithoutSubCategoriaInput | ItemPedidoUpdateWithWhereUniqueWithoutSubCategoriaInput[]
+    updateMany?: ItemPedidoUpdateManyWithWhereWithoutSubCategoriaInput | ItemPedidoUpdateManyWithWhereWithoutSubCategoriaInput[]
+    deleteMany?: ItemPedidoScalarWhereInput | ItemPedidoScalarWhereInput[]
   }
 
   export type ItemPedidoCreateNestedManyWithoutProdutoInput = {
@@ -14920,14 +15075,6 @@ export namespace Prisma {
     connectOrCreate?: ItemPedidoCreateOrConnectWithoutProdutoInput | ItemPedidoCreateOrConnectWithoutProdutoInput[]
     createMany?: ItemPedidoCreateManyProdutoInputEnvelope
     connect?: ItemPedidoWhereUniqueInput | ItemPedidoWhereUniqueInput[]
-  }
-
-  export type SubCategoriaUpdateOneRequiredWithoutProdutoNestedInput = {
-    create?: XOR<SubCategoriaCreateWithoutProdutoInput, SubCategoriaUncheckedCreateWithoutProdutoInput>
-    connectOrCreate?: SubCategoriaCreateOrConnectWithoutProdutoInput
-    upsert?: SubCategoriaUpsertWithoutProdutoInput
-    connect?: SubCategoriaWhereUniqueInput
-    update?: XOR<XOR<SubCategoriaUpdateToOneWithWhereWithoutProdutoInput, SubCategoriaUpdateWithoutProdutoInput>, SubCategoriaUncheckedUpdateWithoutProdutoInput>
   }
 
   export type ItemPedidoUpdateManyWithoutProdutoNestedInput = {
@@ -15024,10 +15171,6 @@ export namespace Prisma {
     connectOrCreate?: CarregamentoPedidoCreateOrConnectWithoutPedidoInput | CarregamentoPedidoCreateOrConnectWithoutPedidoInput[]
     createMany?: CarregamentoPedidoCreateManyPedidoInputEnvelope
     connect?: CarregamentoPedidoWhereUniqueInput | CarregamentoPedidoWhereUniqueInput[]
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type DecimalFieldUpdateOperationsInput = {
@@ -15178,6 +15321,12 @@ export namespace Prisma {
     connect?: ProdutoWhereUniqueInput
   }
 
+  export type SubCategoriaCreateNestedOneWithoutItemPedidoInput = {
+    create?: XOR<SubCategoriaCreateWithoutItemPedidoInput, SubCategoriaUncheckedCreateWithoutItemPedidoInput>
+    connectOrCreate?: SubCategoriaCreateOrConnectWithoutItemPedidoInput
+    connect?: SubCategoriaWhereUniqueInput
+  }
+
   export type PedidoUpdateOneRequiredWithoutItemPedidoNestedInput = {
     create?: XOR<PedidoCreateWithoutItemPedidoInput, PedidoUncheckedCreateWithoutItemPedidoInput>
     connectOrCreate?: PedidoCreateOrConnectWithoutItemPedidoInput
@@ -15192,6 +15341,14 @@ export namespace Prisma {
     upsert?: ProdutoUpsertWithoutItemPedidoInput
     connect?: ProdutoWhereUniqueInput
     update?: XOR<XOR<ProdutoUpdateToOneWithWhereWithoutItemPedidoInput, ProdutoUpdateWithoutItemPedidoInput>, ProdutoUncheckedUpdateWithoutItemPedidoInput>
+  }
+
+  export type SubCategoriaUpdateOneRequiredWithoutItemPedidoNestedInput = {
+    create?: XOR<SubCategoriaCreateWithoutItemPedidoInput, SubCategoriaUncheckedCreateWithoutItemPedidoInput>
+    connectOrCreate?: SubCategoriaCreateOrConnectWithoutItemPedidoInput
+    upsert?: SubCategoriaUpsertWithoutItemPedidoInput
+    connect?: SubCategoriaWhereUniqueInput
+    update?: XOR<XOR<SubCategoriaUpdateToOneWithWhereWithoutItemPedidoInput, SubCategoriaUpdateWithoutItemPedidoInput>, SubCategoriaUncheckedUpdateWithoutItemPedidoInput>
   }
 
   export type PedidoCreateNestedOneWithoutMetadadosPedidoInput = {
@@ -15261,6 +15418,17 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -15305,28 +15473,6 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type NestedDecimalFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-  }
-
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -15339,6 +15485,17 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedDecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
   }
 
   export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
@@ -15482,13 +15639,15 @@ export namespace Prisma {
   export type SubCategoriaCreateWithoutCategoriaInput = {
     SubCategoriaId: string
     SubCategoriaNome: string
-    Produto?: ProdutoCreateNestedManyWithoutSubCategoriaInput
+    SubCategoriaDtImportacao?: Date | string
+    ItemPedido?: ItemPedidoCreateNestedManyWithoutSubCategoriaInput
   }
 
   export type SubCategoriaUncheckedCreateWithoutCategoriaInput = {
     SubCategoriaId: string
     SubCategoriaNome: string
-    Produto?: ProdutoUncheckedCreateNestedManyWithoutSubCategoriaInput
+    SubCategoriaDtImportacao?: Date | string
+    ItemPedido?: ItemPedidoUncheckedCreateNestedManyWithoutSubCategoriaInput
   }
 
   export type SubCategoriaCreateOrConnectWithoutCategoriaInput = {
@@ -15522,18 +15681,21 @@ export namespace Prisma {
     OR?: SubCategoriaScalarWhereInput[]
     NOT?: SubCategoriaScalarWhereInput | SubCategoriaScalarWhereInput[]
     SubCategoriaId?: StringFilter<"SubCategoria"> | string
-    SubCategoriaNome?: StringFilter<"SubCategoria"> | string
     CategoriaId?: StringFilter<"SubCategoria"> | string
+    SubCategoriaNome?: StringFilter<"SubCategoria"> | string
+    SubCategoriaDtImportacao?: DateTimeFilter<"SubCategoria"> | Date | string
   }
 
   export type CategoriaCreateWithoutSubCategoriaInput = {
     CategoriaId: string
     CategoriaNome: string
+    CategoriaDtImportacao?: Date | string
   }
 
   export type CategoriaUncheckedCreateWithoutSubCategoriaInput = {
     CategoriaId: string
     CategoriaNome: string
+    CategoriaDtImportacao?: Date | string
   }
 
   export type CategoriaCreateOrConnectWithoutSubCategoriaInput = {
@@ -15541,25 +15703,31 @@ export namespace Prisma {
     create: XOR<CategoriaCreateWithoutSubCategoriaInput, CategoriaUncheckedCreateWithoutSubCategoriaInput>
   }
 
-  export type ProdutoCreateWithoutSubCategoriaInput = {
+  export type ItemPedidoCreateWithoutSubCategoriaInput = {
+    ItemPedidoId: number
+    ItemPedidoQuantidade: number
+    ItemPedidoPrecoUnitario: Decimal | DecimalJsLike | number | string
+    ItemPedidoValorTotal: Decimal | DecimalJsLike | number | string
+    Pedido: PedidoCreateNestedOneWithoutItemPedidoInput
+    Produto: ProdutoCreateNestedOneWithoutItemPedidoInput
+  }
+
+  export type ItemPedidoUncheckedCreateWithoutSubCategoriaInput = {
+    ItemPedidoId: number
+    PedidoId: string
     ProdutoId: string
-    ProdutoNome: string
-    ItemPedido?: ItemPedidoCreateNestedManyWithoutProdutoInput
+    ItemPedidoQuantidade: number
+    ItemPedidoPrecoUnitario: Decimal | DecimalJsLike | number | string
+    ItemPedidoValorTotal: Decimal | DecimalJsLike | number | string
   }
 
-  export type ProdutoUncheckedCreateWithoutSubCategoriaInput = {
-    ProdutoId: string
-    ProdutoNome: string
-    ItemPedido?: ItemPedidoUncheckedCreateNestedManyWithoutProdutoInput
+  export type ItemPedidoCreateOrConnectWithoutSubCategoriaInput = {
+    where: ItemPedidoWhereUniqueInput
+    create: XOR<ItemPedidoCreateWithoutSubCategoriaInput, ItemPedidoUncheckedCreateWithoutSubCategoriaInput>
   }
 
-  export type ProdutoCreateOrConnectWithoutSubCategoriaInput = {
-    where: ProdutoWhereUniqueInput
-    create: XOR<ProdutoCreateWithoutSubCategoriaInput, ProdutoUncheckedCreateWithoutSubCategoriaInput>
-  }
-
-  export type ProdutoCreateManySubCategoriaInputEnvelope = {
-    data: ProdutoCreateManySubCategoriaInput | ProdutoCreateManySubCategoriaInput[]
+  export type ItemPedidoCreateManySubCategoriaInputEnvelope = {
+    data: ItemPedidoCreateManySubCategoriaInput | ItemPedidoCreateManySubCategoriaInput[]
     skipDuplicates?: boolean
   }
 
@@ -15577,53 +15745,43 @@ export namespace Prisma {
   export type CategoriaUpdateWithoutSubCategoriaInput = {
     CategoriaId?: StringFieldUpdateOperationsInput | string
     CategoriaNome?: StringFieldUpdateOperationsInput | string
+    CategoriaDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CategoriaUncheckedUpdateWithoutSubCategoriaInput = {
     CategoriaId?: StringFieldUpdateOperationsInput | string
     CategoriaNome?: StringFieldUpdateOperationsInput | string
+    CategoriaDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ProdutoUpsertWithWhereUniqueWithoutSubCategoriaInput = {
-    where: ProdutoWhereUniqueInput
-    update: XOR<ProdutoUpdateWithoutSubCategoriaInput, ProdutoUncheckedUpdateWithoutSubCategoriaInput>
-    create: XOR<ProdutoCreateWithoutSubCategoriaInput, ProdutoUncheckedCreateWithoutSubCategoriaInput>
+  export type ItemPedidoUpsertWithWhereUniqueWithoutSubCategoriaInput = {
+    where: ItemPedidoWhereUniqueInput
+    update: XOR<ItemPedidoUpdateWithoutSubCategoriaInput, ItemPedidoUncheckedUpdateWithoutSubCategoriaInput>
+    create: XOR<ItemPedidoCreateWithoutSubCategoriaInput, ItemPedidoUncheckedCreateWithoutSubCategoriaInput>
   }
 
-  export type ProdutoUpdateWithWhereUniqueWithoutSubCategoriaInput = {
-    where: ProdutoWhereUniqueInput
-    data: XOR<ProdutoUpdateWithoutSubCategoriaInput, ProdutoUncheckedUpdateWithoutSubCategoriaInput>
+  export type ItemPedidoUpdateWithWhereUniqueWithoutSubCategoriaInput = {
+    where: ItemPedidoWhereUniqueInput
+    data: XOR<ItemPedidoUpdateWithoutSubCategoriaInput, ItemPedidoUncheckedUpdateWithoutSubCategoriaInput>
   }
 
-  export type ProdutoUpdateManyWithWhereWithoutSubCategoriaInput = {
-    where: ProdutoScalarWhereInput
-    data: XOR<ProdutoUpdateManyMutationInput, ProdutoUncheckedUpdateManyWithoutSubCategoriaInput>
+  export type ItemPedidoUpdateManyWithWhereWithoutSubCategoriaInput = {
+    where: ItemPedidoScalarWhereInput
+    data: XOR<ItemPedidoUpdateManyMutationInput, ItemPedidoUncheckedUpdateManyWithoutSubCategoriaInput>
   }
 
-  export type ProdutoScalarWhereInput = {
-    AND?: ProdutoScalarWhereInput | ProdutoScalarWhereInput[]
-    OR?: ProdutoScalarWhereInput[]
-    NOT?: ProdutoScalarWhereInput | ProdutoScalarWhereInput[]
-    ProdutoId?: StringFilter<"Produto"> | string
-    ProdutoNome?: StringFilter<"Produto"> | string
-    SubCategoriaId?: StringFilter<"Produto"> | string
-  }
-
-  export type SubCategoriaCreateWithoutProdutoInput = {
-    SubCategoriaId: string
-    SubCategoriaNome: string
-    Categoria: CategoriaCreateNestedOneWithoutSubCategoriaInput
-  }
-
-  export type SubCategoriaUncheckedCreateWithoutProdutoInput = {
-    SubCategoriaId: string
-    SubCategoriaNome: string
-    CategoriaId: string
-  }
-
-  export type SubCategoriaCreateOrConnectWithoutProdutoInput = {
-    where: SubCategoriaWhereUniqueInput
-    create: XOR<SubCategoriaCreateWithoutProdutoInput, SubCategoriaUncheckedCreateWithoutProdutoInput>
+  export type ItemPedidoScalarWhereInput = {
+    AND?: ItemPedidoScalarWhereInput | ItemPedidoScalarWhereInput[]
+    OR?: ItemPedidoScalarWhereInput[]
+    NOT?: ItemPedidoScalarWhereInput | ItemPedidoScalarWhereInput[]
+    ItemPedidoId?: IntFilter<"ItemPedido"> | number
+    PedidoId?: StringFilter<"ItemPedido"> | string
+    ProdutoId?: StringFilter<"ItemPedido"> | string
+    ItemPedidoQuantidade?: IntFilter<"ItemPedido"> | number
+    ItemPedidoPrecoUnitario?: DecimalFilter<"ItemPedido"> | Decimal | DecimalJsLike | number | string
+    ItemPedidoValorTotal?: DecimalFilter<"ItemPedido"> | Decimal | DecimalJsLike | number | string
+    SubCategoriaId?: StringFilter<"ItemPedido"> | string
+    CategoriaId?: StringFilter<"ItemPedido"> | string
   }
 
   export type ItemPedidoCreateWithoutProdutoInput = {
@@ -15632,6 +15790,7 @@ export namespace Prisma {
     ItemPedidoPrecoUnitario: Decimal | DecimalJsLike | number | string
     ItemPedidoValorTotal: Decimal | DecimalJsLike | number | string
     Pedido: PedidoCreateNestedOneWithoutItemPedidoInput
+    SubCategoria: SubCategoriaCreateNestedOneWithoutItemPedidoInput
   }
 
   export type ItemPedidoUncheckedCreateWithoutProdutoInput = {
@@ -15640,6 +15799,8 @@ export namespace Prisma {
     ItemPedidoQuantidade: number
     ItemPedidoPrecoUnitario: Decimal | DecimalJsLike | number | string
     ItemPedidoValorTotal: Decimal | DecimalJsLike | number | string
+    SubCategoriaId: string
+    CategoriaId: string
   }
 
   export type ItemPedidoCreateOrConnectWithoutProdutoInput = {
@@ -15650,29 +15811,6 @@ export namespace Prisma {
   export type ItemPedidoCreateManyProdutoInputEnvelope = {
     data: ItemPedidoCreateManyProdutoInput | ItemPedidoCreateManyProdutoInput[]
     skipDuplicates?: boolean
-  }
-
-  export type SubCategoriaUpsertWithoutProdutoInput = {
-    update: XOR<SubCategoriaUpdateWithoutProdutoInput, SubCategoriaUncheckedUpdateWithoutProdutoInput>
-    create: XOR<SubCategoriaCreateWithoutProdutoInput, SubCategoriaUncheckedCreateWithoutProdutoInput>
-    where?: SubCategoriaWhereInput
-  }
-
-  export type SubCategoriaUpdateToOneWithWhereWithoutProdutoInput = {
-    where?: SubCategoriaWhereInput
-    data: XOR<SubCategoriaUpdateWithoutProdutoInput, SubCategoriaUncheckedUpdateWithoutProdutoInput>
-  }
-
-  export type SubCategoriaUpdateWithoutProdutoInput = {
-    SubCategoriaId?: StringFieldUpdateOperationsInput | string
-    SubCategoriaNome?: StringFieldUpdateOperationsInput | string
-    Categoria?: CategoriaUpdateOneRequiredWithoutSubCategoriaNestedInput
-  }
-
-  export type SubCategoriaUncheckedUpdateWithoutProdutoInput = {
-    SubCategoriaId?: StringFieldUpdateOperationsInput | string
-    SubCategoriaNome?: StringFieldUpdateOperationsInput | string
-    CategoriaId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ItemPedidoUpsertWithWhereUniqueWithoutProdutoInput = {
@@ -15691,23 +15829,12 @@ export namespace Prisma {
     data: XOR<ItemPedidoUpdateManyMutationInput, ItemPedidoUncheckedUpdateManyWithoutProdutoInput>
   }
 
-  export type ItemPedidoScalarWhereInput = {
-    AND?: ItemPedidoScalarWhereInput | ItemPedidoScalarWhereInput[]
-    OR?: ItemPedidoScalarWhereInput[]
-    NOT?: ItemPedidoScalarWhereInput | ItemPedidoScalarWhereInput[]
-    ItemPedidoId?: IntFilter<"ItemPedido"> | number
-    PedidoId?: StringFilter<"ItemPedido"> | string
-    ProdutoId?: StringFilter<"ItemPedido"> | string
-    ItemPedidoQuantidade?: IntFilter<"ItemPedido"> | number
-    ItemPedidoPrecoUnitario?: DecimalFilter<"ItemPedido"> | Decimal | DecimalJsLike | number | string
-    ItemPedidoValorTotal?: DecimalFilter<"ItemPedido"> | Decimal | DecimalJsLike | number | string
-  }
-
   export type ClienteCreateWithoutPedidoInput = {
     ClienteId: number
     ClienteNome: string
     ClienteEmail: string
     ClienteDocumento: string
+    ClienteDtImportacao?: Date | string
   }
 
   export type ClienteUncheckedCreateWithoutPedidoInput = {
@@ -15715,6 +15842,7 @@ export namespace Prisma {
     ClienteNome: string
     ClienteEmail: string
     ClienteDocumento: string
+    ClienteDtImportacao?: Date | string
   }
 
   export type ClienteCreateOrConnectWithoutPedidoInput = {
@@ -15727,6 +15855,7 @@ export namespace Prisma {
     VendedorNome: string
     VendedorCidade: string
     VendedorUF: string
+    VendedorDtImportacao?: Date | string
   }
 
   export type VendedorUncheckedCreateWithoutPedidoInput = {
@@ -15734,6 +15863,7 @@ export namespace Prisma {
     VendedorNome: string
     VendedorCidade: string
     VendedorUF: string
+    VendedorDtImportacao?: Date | string
   }
 
   export type VendedorCreateOrConnectWithoutPedidoInput = {
@@ -15747,6 +15877,7 @@ export namespace Prisma {
     ItemPedidoPrecoUnitario: Decimal | DecimalJsLike | number | string
     ItemPedidoValorTotal: Decimal | DecimalJsLike | number | string
     Produto: ProdutoCreateNestedOneWithoutItemPedidoInput
+    SubCategoria: SubCategoriaCreateNestedOneWithoutItemPedidoInput
   }
 
   export type ItemPedidoUncheckedCreateWithoutPedidoInput = {
@@ -15755,6 +15886,8 @@ export namespace Prisma {
     ItemPedidoQuantidade: number
     ItemPedidoPrecoUnitario: Decimal | DecimalJsLike | number | string
     ItemPedidoValorTotal: Decimal | DecimalJsLike | number | string
+    SubCategoriaId: string
+    CategoriaId: string
   }
 
   export type ItemPedidoCreateOrConnectWithoutPedidoInput = {
@@ -15857,6 +15990,7 @@ export namespace Prisma {
     ClienteNome?: StringFieldUpdateOperationsInput | string
     ClienteEmail?: StringFieldUpdateOperationsInput | string
     ClienteDocumento?: StringFieldUpdateOperationsInput | string
+    ClienteDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ClienteUncheckedUpdateWithoutPedidoInput = {
@@ -15864,6 +15998,7 @@ export namespace Prisma {
     ClienteNome?: StringFieldUpdateOperationsInput | string
     ClienteEmail?: StringFieldUpdateOperationsInput | string
     ClienteDocumento?: StringFieldUpdateOperationsInput | string
+    ClienteDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type VendedorUpsertWithoutPedidoInput = {
@@ -15882,6 +16017,7 @@ export namespace Prisma {
     VendedorNome?: StringFieldUpdateOperationsInput | string
     VendedorCidade?: StringFieldUpdateOperationsInput | string
     VendedorUF?: StringFieldUpdateOperationsInput | string
+    VendedorDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type VendedorUncheckedUpdateWithoutPedidoInput = {
@@ -15889,6 +16025,7 @@ export namespace Prisma {
     VendedorNome?: StringFieldUpdateOperationsInput | string
     VendedorCidade?: StringFieldUpdateOperationsInput | string
     VendedorUF?: StringFieldUpdateOperationsInput | string
+    VendedorDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ItemPedidoUpsertWithWhereUniqueWithoutPedidoInput = {
@@ -16025,18 +16162,37 @@ export namespace Prisma {
   export type ProdutoCreateWithoutItemPedidoInput = {
     ProdutoId: string
     ProdutoNome: string
-    SubCategoria: SubCategoriaCreateNestedOneWithoutProdutoInput
+    ProdutoDtImportacao?: Date | string
   }
 
   export type ProdutoUncheckedCreateWithoutItemPedidoInput = {
     ProdutoId: string
     ProdutoNome: string
-    SubCategoriaId: string
+    ProdutoDtImportacao?: Date | string
   }
 
   export type ProdutoCreateOrConnectWithoutItemPedidoInput = {
     where: ProdutoWhereUniqueInput
     create: XOR<ProdutoCreateWithoutItemPedidoInput, ProdutoUncheckedCreateWithoutItemPedidoInput>
+  }
+
+  export type SubCategoriaCreateWithoutItemPedidoInput = {
+    SubCategoriaId: string
+    SubCategoriaNome: string
+    SubCategoriaDtImportacao?: Date | string
+    Categoria: CategoriaCreateNestedOneWithoutSubCategoriaInput
+  }
+
+  export type SubCategoriaUncheckedCreateWithoutItemPedidoInput = {
+    SubCategoriaId: string
+    CategoriaId: string
+    SubCategoriaNome: string
+    SubCategoriaDtImportacao?: Date | string
+  }
+
+  export type SubCategoriaCreateOrConnectWithoutItemPedidoInput = {
+    where: SubCategoriaWhereUniqueInput
+    create: XOR<SubCategoriaCreateWithoutItemPedidoInput, SubCategoriaUncheckedCreateWithoutItemPedidoInput>
   }
 
   export type PedidoUpsertWithoutItemPedidoInput = {
@@ -16092,13 +16248,38 @@ export namespace Prisma {
   export type ProdutoUpdateWithoutItemPedidoInput = {
     ProdutoId?: StringFieldUpdateOperationsInput | string
     ProdutoNome?: StringFieldUpdateOperationsInput | string
-    SubCategoria?: SubCategoriaUpdateOneRequiredWithoutProdutoNestedInput
+    ProdutoDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProdutoUncheckedUpdateWithoutItemPedidoInput = {
     ProdutoId?: StringFieldUpdateOperationsInput | string
     ProdutoNome?: StringFieldUpdateOperationsInput | string
+    ProdutoDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SubCategoriaUpsertWithoutItemPedidoInput = {
+    update: XOR<SubCategoriaUpdateWithoutItemPedidoInput, SubCategoriaUncheckedUpdateWithoutItemPedidoInput>
+    create: XOR<SubCategoriaCreateWithoutItemPedidoInput, SubCategoriaUncheckedCreateWithoutItemPedidoInput>
+    where?: SubCategoriaWhereInput
+  }
+
+  export type SubCategoriaUpdateToOneWithWhereWithoutItemPedidoInput = {
+    where?: SubCategoriaWhereInput
+    data: XOR<SubCategoriaUpdateWithoutItemPedidoInput, SubCategoriaUncheckedUpdateWithoutItemPedidoInput>
+  }
+
+  export type SubCategoriaUpdateWithoutItemPedidoInput = {
     SubCategoriaId?: StringFieldUpdateOperationsInput | string
+    SubCategoriaNome?: StringFieldUpdateOperationsInput | string
+    SubCategoriaDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    Categoria?: CategoriaUpdateOneRequiredWithoutSubCategoriaNestedInput
+  }
+
+  export type SubCategoriaUncheckedUpdateWithoutItemPedidoInput = {
+    SubCategoriaId?: StringFieldUpdateOperationsInput | string
+    CategoriaId?: StringFieldUpdateOperationsInput | string
+    SubCategoriaNome?: StringFieldUpdateOperationsInput | string
+    SubCategoriaDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PedidoCreateWithoutMetadadosPedidoInput = {
@@ -16416,45 +16597,63 @@ export namespace Prisma {
   export type SubCategoriaCreateManyCategoriaInput = {
     SubCategoriaId: string
     SubCategoriaNome: string
+    SubCategoriaDtImportacao?: Date | string
   }
 
   export type SubCategoriaUpdateWithoutCategoriaInput = {
     SubCategoriaId?: StringFieldUpdateOperationsInput | string
     SubCategoriaNome?: StringFieldUpdateOperationsInput | string
-    Produto?: ProdutoUpdateManyWithoutSubCategoriaNestedInput
+    SubCategoriaDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    ItemPedido?: ItemPedidoUpdateManyWithoutSubCategoriaNestedInput
   }
 
   export type SubCategoriaUncheckedUpdateWithoutCategoriaInput = {
     SubCategoriaId?: StringFieldUpdateOperationsInput | string
     SubCategoriaNome?: StringFieldUpdateOperationsInput | string
-    Produto?: ProdutoUncheckedUpdateManyWithoutSubCategoriaNestedInput
+    SubCategoriaDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    ItemPedido?: ItemPedidoUncheckedUpdateManyWithoutSubCategoriaNestedInput
   }
 
   export type SubCategoriaUncheckedUpdateManyWithoutCategoriaInput = {
     SubCategoriaId?: StringFieldUpdateOperationsInput | string
     SubCategoriaNome?: StringFieldUpdateOperationsInput | string
+    SubCategoriaDtImportacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ProdutoCreateManySubCategoriaInput = {
+  export type ItemPedidoCreateManySubCategoriaInput = {
+    ItemPedidoId: number
+    PedidoId: string
     ProdutoId: string
-    ProdutoNome: string
+    ItemPedidoQuantidade: number
+    ItemPedidoPrecoUnitario: Decimal | DecimalJsLike | number | string
+    ItemPedidoValorTotal: Decimal | DecimalJsLike | number | string
   }
 
-  export type ProdutoUpdateWithoutSubCategoriaInput = {
-    ProdutoId?: StringFieldUpdateOperationsInput | string
-    ProdutoNome?: StringFieldUpdateOperationsInput | string
-    ItemPedido?: ItemPedidoUpdateManyWithoutProdutoNestedInput
+  export type ItemPedidoUpdateWithoutSubCategoriaInput = {
+    ItemPedidoId?: IntFieldUpdateOperationsInput | number
+    ItemPedidoQuantidade?: IntFieldUpdateOperationsInput | number
+    ItemPedidoPrecoUnitario?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ItemPedidoValorTotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    Pedido?: PedidoUpdateOneRequiredWithoutItemPedidoNestedInput
+    Produto?: ProdutoUpdateOneRequiredWithoutItemPedidoNestedInput
   }
 
-  export type ProdutoUncheckedUpdateWithoutSubCategoriaInput = {
+  export type ItemPedidoUncheckedUpdateWithoutSubCategoriaInput = {
+    ItemPedidoId?: IntFieldUpdateOperationsInput | number
+    PedidoId?: StringFieldUpdateOperationsInput | string
     ProdutoId?: StringFieldUpdateOperationsInput | string
-    ProdutoNome?: StringFieldUpdateOperationsInput | string
-    ItemPedido?: ItemPedidoUncheckedUpdateManyWithoutProdutoNestedInput
+    ItemPedidoQuantidade?: IntFieldUpdateOperationsInput | number
+    ItemPedidoPrecoUnitario?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ItemPedidoValorTotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
   }
 
-  export type ProdutoUncheckedUpdateManyWithoutSubCategoriaInput = {
+  export type ItemPedidoUncheckedUpdateManyWithoutSubCategoriaInput = {
+    ItemPedidoId?: IntFieldUpdateOperationsInput | number
+    PedidoId?: StringFieldUpdateOperationsInput | string
     ProdutoId?: StringFieldUpdateOperationsInput | string
-    ProdutoNome?: StringFieldUpdateOperationsInput | string
+    ItemPedidoQuantidade?: IntFieldUpdateOperationsInput | number
+    ItemPedidoPrecoUnitario?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ItemPedidoValorTotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
   }
 
   export type ItemPedidoCreateManyProdutoInput = {
@@ -16463,6 +16662,8 @@ export namespace Prisma {
     ItemPedidoQuantidade: number
     ItemPedidoPrecoUnitario: Decimal | DecimalJsLike | number | string
     ItemPedidoValorTotal: Decimal | DecimalJsLike | number | string
+    SubCategoriaId: string
+    CategoriaId: string
   }
 
   export type ItemPedidoUpdateWithoutProdutoInput = {
@@ -16471,6 +16672,7 @@ export namespace Prisma {
     ItemPedidoPrecoUnitario?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     ItemPedidoValorTotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     Pedido?: PedidoUpdateOneRequiredWithoutItemPedidoNestedInput
+    SubCategoria?: SubCategoriaUpdateOneRequiredWithoutItemPedidoNestedInput
   }
 
   export type ItemPedidoUncheckedUpdateWithoutProdutoInput = {
@@ -16479,6 +16681,8 @@ export namespace Prisma {
     ItemPedidoQuantidade?: IntFieldUpdateOperationsInput | number
     ItemPedidoPrecoUnitario?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     ItemPedidoValorTotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    SubCategoriaId?: StringFieldUpdateOperationsInput | string
+    CategoriaId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ItemPedidoUncheckedUpdateManyWithoutProdutoInput = {
@@ -16487,6 +16691,8 @@ export namespace Prisma {
     ItemPedidoQuantidade?: IntFieldUpdateOperationsInput | number
     ItemPedidoPrecoUnitario?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     ItemPedidoValorTotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    SubCategoriaId?: StringFieldUpdateOperationsInput | string
+    CategoriaId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ItemPedidoCreateManyPedidoInput = {
@@ -16495,6 +16701,8 @@ export namespace Prisma {
     ItemPedidoQuantidade: number
     ItemPedidoPrecoUnitario: Decimal | DecimalJsLike | number | string
     ItemPedidoValorTotal: Decimal | DecimalJsLike | number | string
+    SubCategoriaId: string
+    CategoriaId: string
   }
 
   export type MetadadosPedidoCreateManyPedidoInput = {
@@ -16525,6 +16733,7 @@ export namespace Prisma {
     ItemPedidoPrecoUnitario?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     ItemPedidoValorTotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     Produto?: ProdutoUpdateOneRequiredWithoutItemPedidoNestedInput
+    SubCategoria?: SubCategoriaUpdateOneRequiredWithoutItemPedidoNestedInput
   }
 
   export type ItemPedidoUncheckedUpdateWithoutPedidoInput = {
@@ -16533,6 +16742,8 @@ export namespace Prisma {
     ItemPedidoQuantidade?: IntFieldUpdateOperationsInput | number
     ItemPedidoPrecoUnitario?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     ItemPedidoValorTotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    SubCategoriaId?: StringFieldUpdateOperationsInput | string
+    CategoriaId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ItemPedidoUncheckedUpdateManyWithoutPedidoInput = {
@@ -16541,6 +16752,8 @@ export namespace Prisma {
     ItemPedidoQuantidade?: IntFieldUpdateOperationsInput | number
     ItemPedidoPrecoUnitario?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     ItemPedidoValorTotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    SubCategoriaId?: StringFieldUpdateOperationsInput | string
+    CategoriaId?: StringFieldUpdateOperationsInput | string
   }
 
   export type MetadadosPedidoUpdateWithoutPedidoInput = {

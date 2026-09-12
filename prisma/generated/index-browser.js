@@ -124,31 +124,35 @@ exports.Prisma.ClienteScalarFieldEnum = {
   ClienteId: 'ClienteId',
   ClienteNome: 'ClienteNome',
   ClienteEmail: 'ClienteEmail',
-  ClienteDocumento: 'ClienteDocumento'
+  ClienteDocumento: 'ClienteDocumento',
+  ClienteDtImportacao: 'ClienteDtImportacao'
 };
 
 exports.Prisma.VendedorScalarFieldEnum = {
   VendedorId: 'VendedorId',
   VendedorNome: 'VendedorNome',
   VendedorCidade: 'VendedorCidade',
-  VendedorUF: 'VendedorUF'
+  VendedorUF: 'VendedorUF',
+  VendedorDtImportacao: 'VendedorDtImportacao'
 };
 
 exports.Prisma.CategoriaScalarFieldEnum = {
   CategoriaId: 'CategoriaId',
-  CategoriaNome: 'CategoriaNome'
+  CategoriaNome: 'CategoriaNome',
+  CategoriaDtImportacao: 'CategoriaDtImportacao'
 };
 
 exports.Prisma.SubCategoriaScalarFieldEnum = {
   SubCategoriaId: 'SubCategoriaId',
+  CategoriaId: 'CategoriaId',
   SubCategoriaNome: 'SubCategoriaNome',
-  CategoriaId: 'CategoriaId'
+  SubCategoriaDtImportacao: 'SubCategoriaDtImportacao'
 };
 
 exports.Prisma.ProdutoScalarFieldEnum = {
   ProdutoId: 'ProdutoId',
   ProdutoNome: 'ProdutoNome',
-  SubCategoriaId: 'SubCategoriaId'
+  ProdutoDtImportacao: 'ProdutoDtImportacao'
 };
 
 exports.Prisma.PedidoScalarFieldEnum = {
@@ -168,7 +172,9 @@ exports.Prisma.ItemPedidoScalarFieldEnum = {
   ProdutoId: 'ProdutoId',
   ItemPedidoQuantidade: 'ItemPedidoQuantidade',
   ItemPedidoPrecoUnitario: 'ItemPedidoPrecoUnitario',
-  ItemPedidoValorTotal: 'ItemPedidoValorTotal'
+  ItemPedidoValorTotal: 'ItemPedidoValorTotal',
+  SubCategoriaId: 'SubCategoriaId',
+  CategoriaId: 'CategoriaId'
 };
 
 exports.Prisma.MetadadosPedidoScalarFieldEnum = {

@@ -1,0 +1,113 @@
+{
+  "uuid": "46d0dac8-fabf-42f1-b6d1-c44f7a9822bb",
+  "channel": "api",
+  "status": "created",
+  "customer": {
+    "id": 1003,
+    "name": "Ana Santos",
+    "email": "ana.santos@email.com",
+    "document": "456.789.123-00"
+  },
+  "seller": {
+    "id": 116,
+    "name": "Sul Digital",
+    "city": "Joinville",
+    "state": "SC"
+  },
+  "items": [
+    {
+      "id": 1,
+      "product": {
+        "id": "ELEC-001",
+        "title": "Smartphone Galaxy S24"
+      },
+      "quantity": 3,
+      "category": {
+        "id": "HOME",
+        "name": "Casa",
+        "sub_category": {
+          "id": "APPLIANCE",
+          "name": "Eletrodomésticos"
+        }
+      },
+      "unit_price": 4460.98,
+      "total_item": 13382.939999999999
+    },
+    {
+      "id": 2,
+      "product": {
+        "id": "ELEC-008",
+        "title": "Mouse Logitech MX"
+      },
+      "quantity": 4,
+      "category": {
+        "id": "ELEC",
+        "name": "Eletrônicos",
+        "sub_category": {
+          "id": "PHONE",
+          "name": "Smartphones"
+        }
+      },
+      "unit_price": 257.9,
+      "total_item": 1031.6
+    },
+    {
+      "id": 3,
+      "product": {
+        "id": "HOME-002",
+        "title": "Air Fryer Mondial"
+      },
+      "quantity": 3,
+      "category": {
+        "id": "ELEC",
+        "name": "Eletrônicos",
+        "sub_category": {
+          "id": "PERIPH",
+          "name": "Periféricos"
+        }
+      },
+      "unit_price": 841.78,
+      "total_item": 2525.34
+    },
+    {
+      "id": 4,
+      "product": {
+        "id": "ELEC-006",
+        "title": "Smart TV LG 55\""
+      },
+      "quantity": 2,
+      "category": {
+        "id": "ELEC",
+        "name": "Eletrônicos",
+        "sub_category": {
+          "id": "PERIPH",
+          "name": "Periféricos"
+        }
+      },
+      "unit_price": 2044.61,
+      "total_item": 4089.22
+    }
+  ],
+  "shipment": {
+    "carrier": "Correios",
+    "service": "PAC",
+    "status": "delivered",
+    "tracking_code": "BR423201689"
+  },
+  "payment": {
+    "method": "pix",
+    "status": "pending",
+    "transaction_id": "pay_147487262"
+  },
+  "metadata": {
+    "source": "web",
+    "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)",
+    "ip_address": "10.0.240.156"
+  },
+  "created_at": "2026-09-12T10:51:13.025123Z",
+  "totais": {
+    "valor_total_pedido": 21029.1,
+    "total_itens": 4
+  },
+  "processado_em": "2026-09-12T12:55:29.871Z"
+}

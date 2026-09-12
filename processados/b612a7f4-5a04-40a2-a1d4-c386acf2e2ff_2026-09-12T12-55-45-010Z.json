@@ -1,0 +1,59 @@
+{
+  "uuid": "b612a7f4-5a04-40a2-a1d4-c386acf2e2ff",
+  "channel": "mobile_app",
+  "status": "created",
+  "customer": {
+    "id": 1027,
+    "name": "Aline Vieira",
+    "email": "aline.vieira@email.com",
+    "document": "789.654.321-00"
+  },
+  "seller": {
+    "id": 120,
+    "name": "Top Vendas",
+    "city": "Ribeirão Preto",
+    "state": "SP"
+  },
+  "items": [
+    {
+      "id": 1,
+      "product": {
+        "id": "ELEC-010",
+        "title": "Fone Bluetooth JBL"
+      },
+      "quantity": 4,
+      "category": {
+        "id": "GAME",
+        "name": "Games",
+        "sub_category": {
+          "id": "ACC",
+          "name": "Acessórios"
+        }
+      },
+      "unit_price": 881.67,
+      "total_item": 3526.68
+    }
+  ],
+  "shipment": {
+    "carrier": "Jadlog",
+    "service": "Express",
+    "status": "pending",
+    "tracking_code": "BR189922174"
+  },
+  "payment": {
+    "method": "pix",
+    "status": "approved",
+    "transaction_id": "pay_981426168"
+  },
+  "metadata": {
+    "source": "web",
+    "user_agent": "Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36",
+    "ip_address": "10.0.23.27"
+  },
+  "created_at": "2026-09-12T10:51:15.682850Z",
+  "totais": {
+    "valor_total_pedido": 3526.68,
+    "total_itens": 1
+  },
+  "processado_em": "2026-09-12T12:55:45.010Z"
+}
