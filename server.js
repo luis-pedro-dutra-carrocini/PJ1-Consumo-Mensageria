@@ -1,7 +1,6 @@
 const express = require('express');
 const { PrismaClient } = require('./prisma/generated/client');
 const { PrismaPg } = require('@prisma/adapter-pg');
-const PubSubPublisher = require('./publisher');
 require('dotenv').config();
 
 const { mapPedido, mapItem } = require('./pedidoMapper');
