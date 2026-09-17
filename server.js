@@ -138,7 +138,7 @@ app.get('/api/orders/financial-summary', async (req, res) => {
       where.PedidoDtCriacao = {};
 
       if (startDateRaw) {
-        const start = new Date(startDateRaw);
+        const start = new Date(`${startDateRaw}T00:00:00.000Z`);
         if (isNaN(start.getTime())) {
           return res.status(400).json({ error: 'start_date inválido (use ISO 8601)' });
         }
@@ -146,7 +146,7 @@ app.get('/api/orders/financial-summary', async (req, res) => {
       }
 
       if (endDateRaw) {
-        const end = new Date(endDateRaw);
+        const end = new Date(`${endDateRaw}T23:59:59.999Z`);
         if (isNaN(end.getTime())) {
           return res.status(400).json({ error: 'end_date inválido (use ISO 8601)' });
         }
