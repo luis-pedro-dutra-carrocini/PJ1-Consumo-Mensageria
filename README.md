@@ -41,6 +41,9 @@ Documentação dos dois processos que compõem a solução:
 - **Banco:** PostgreSQL, acessado via Prisma ORM.
 - **API:** Express, retorna JSON no formato de saída padronizado (`uuid`, `customer`, `items`, etc.).
 
+DER do Banco de Dados:
+<img src="/DOCS/DER.png">
+
 ---
 
 ## 🔧 Variáveis de ambiente (`.env`)
