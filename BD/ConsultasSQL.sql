@@ -12,6 +12,10 @@ select * from "Pedido" where "PedidoId" = 'f2251cd7-c173-41f2-b654-c2387504fb49'
 
 select * from "Pedido";
 
+select * from "Pedido" order by "PedidoDtCriacao" desc;
+
+select count(*) from "Pedido";
+
 select * from "ItemPedido" where "PedidoId" = 'f2251cd7-c173-41f2-b654-c2387504fb49';
 
 select * from "MetadadosPedido" where "PedidoId" = 'f2251cd7-c173-41f2-b654-c2387504fb49';

@@ -309,6 +309,6 @@ const server = app.listen(PORT, () => {
     console.log(`🔗 Endpoint para consulta de pedidos (Filtros / Paginação): GET http://localhost:${PORT}/api/orders?customer.id=49494&seller.id=55&status=shipped&product.id=abc-1344&page=2&limit=20`);
     console.log(`🔗 Endpoint para consulta de um pedido específico: GET http://localhost:${PORT}/api/orders/:uuid`);
     console.log(`🔗 Endpoint para consulta de itens de um pedido específico: GET http://localhost:${PORT}/api/orders/:uuid/items`);
-    console.log(`🔗 Endpoint para consulta de resumo de vendas (Filtros): GET http://localhost:3000/api/orders/financial-summary?seller.id=116&start_date=2026-01-01&end_date=2026-01-31`);
+    console.log(`🔗 Endpoint para consulta de resumo de vendas (Filtros): GET http://localhost:${PORT}/api/orders/financial-summary?seller.id=116&start_date=2026-01-01&end_date=2026-01-31`);
 });
 
